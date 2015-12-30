@@ -1,0 +1,38 @@
+<h1>Content Inventory Automation Spreadsheets</h1>
+
+<%= render 'flash_messages' unless !flash.empty? %>
+
+<h3>Existing Spreadsheets</h3>
+
+<table class="table table-bordered">
+  <tr class="table-header">
+    <th>Name</th>
+    <th>Last Generated</th>
+    <th width="28%">Action</th>
+    <th width="33%">Notes</th>
+  </tr>
+
+  <% @inventories.each do |inventory| %>
+    <tr>
+      <td><%= link_to inventory.name, inventory.spreadsheet_url, target: "_blank" %></td>
+      <td><%= inventory.presented_date_generated %></td>
+      <td>
+        <% unless inventory.is_skeleton? %>
+          <%= link_to('Delete', inventory_path(inventory), class: 'btn btn-danger', method: :delete, data: {confirm: "Are you sure?"}) %>
+          <%= link_to('Regenerate Queries', "inventories/#{inventory.id}", method: :patch, class: 'btn btn-success') %>
+          <%= link_to('Logs', activity_log_path(inventory.id), method: :get, class: 'btn btn-default') %>
+        <% end %>
+      </td>
+      <td><font color="red"><%= inventory.flash_notes %></font></td>
+    </tr>
+  <% end %>
+</table>
+
+<h3>Create a new spreadsheet from the Skeleton</h3>
+
+<%= render 'duplication_form' %>
+
+
+
+
+

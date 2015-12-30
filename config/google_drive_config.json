@@ -1,0 +1,9 @@
+{
+  "client_id": null,
+  "client_secret": null,
+  "scope": [
+    "https://www.googleapis.com/auth/drive",
+    "https://spreadsheets.google.com/feeds/"
+  ],
+  "refresh_token": "1/AUNh1aOdTESQBa4f4xqE5qVHNGnO-_2dEi4hF1woPYdIgOrJDtdun6zK6XiATCKT"
+}

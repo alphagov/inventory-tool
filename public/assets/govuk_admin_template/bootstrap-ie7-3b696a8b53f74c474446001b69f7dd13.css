@@ -1,0 +1,1362 @@
+/*
+  IE7 Bootstrap 3 fixes
+  via https://github.com/coliff/bootstrap-ie7
+
+  * Doesn't fix IE6, but it helps.
+  * Fixes glyphicon font
+  * Fixes small layout issues mostly by applying hasLayout
+  * Creates a limited grid system that works without box sizing support
+    * Uses important to override highly specific styles included by RespondJS
+*/
+/* line 15, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.col-xs-1,
+.col-md-1,
+.col-sm-1 {
+  width: 60px !important;
+}
+
+/* line 21, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.col-xs-2,
+.col-md-2,
+.col-sm-2 {
+  width: 140px !important;
+}
+
+/* line 27, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.col-xs-3,
+.col-md-3,
+.col-sm-3 {
+  width: 220px !important;
+}
+
+/* line 33, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.col-xs-4,
+.col-md-4,
+.col-sm-4 {
+  width: 300px !important;
+}
+
+/* line 39, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.col-xs-5,
+.col-md-5,
+.col-sm-5 {
+  width: 380px !important;
+}
+
+/* line 45, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.col-xs-6,
+.col-md-6,
+.col-sm-6 {
+  width: 460px !important;
+}
+
+/* line 51, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.col-xs-7,
+.col-md-7,
+.col-sm-7 {
+  width: 540px !important;
+}
+
+/* line 57, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.col-xs-8,
+.col-md-8,
+.col-sm-8 {
+  width: 620px !important;
+}
+
+/* line 63, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.col-xs-9,
+.col-md-9,
+.col-sm-9 {
+  width: 700px !important;
+}
+
+/* line 69, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.col-xs-10,
+.col-md-10,
+.col-sm-10 {
+  width: 780px !important;
+}
+
+/* line 75, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.col-xs-11,
+.col-md-11,
+.col-sm-11 {
+  width: 860px !important;
+}
+
+/* line 81, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.col-xs-12,
+.col-md-12,
+.col-sm-12 {
+  width: 940px !important;
+}
+
+/* line 120, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.col-xs-1,
+.col-xs-2,
+.col-xs-3,
+.col-xs-4,
+.col-xs-5,
+.col-xs-6,
+.col-xs-7,
+.col-xs-8,
+.col-xs-9,
+.col-xs-10,
+.col-xs-11,
+.col-xs-12,
+.col-sm-1,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-md-1,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-md-10,
+.col-md-11,
+.col-md-12 {
+  padding-left: 0;
+  padding-right: 0;
+  min-height: 1px;
+  margin-left: 20px;
+  margin-right: 0;
+  float: left;
+}
+
+/* line 129, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.row {
+  margin-left: -20px;
+}
+
+/* line 134, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.row:before,
+.row:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+/* line 140, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.row:after {
+  clear: both;
+}
+
+/* line 146, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+audio,
+canvas,
+video {
+  display: inline;
+  zoom: 1;
+}
+
+/* line 151, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+html {
+  font-size: 100%;
+}
+
+/* line 155, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+body {
+  margin: 0;
+}
+
+/* line 161, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+ul,
+ol,
+dl {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* line 166, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+legend {
+  margin-left: -7px;
+}
+
+/* line 170, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+img {
+  width: auto;
+  height: auto;
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+}
+
+/*
+  Remove inner spacing in IE 7 without affecting normal text inputs.
+  Reduce Bootstrap 3 button padding from 6px to 4px to keep buttons same height.
+*/
+/* line 183, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+button,
+input[type="reset"],
+input[type="submit"] {
+  overflow: visible;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+/* Remove excess padding in IE 7 */
+/* line 191, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+input[type="checkbox"],
+input[type="radio"] {
+  margin-top: 5px;
+  margin-right: 10px;
+  height: 13px;
+  width: 13px;
+}
+
+/* Bootstrap 3 text inputs have height that doesn't include
+   12px of padding due to border-box. Reduce height from 34px
+   to 22px to account for padding in IE7 */
+/* line 202, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+input[type="text"],
+input[type="password"] {
+  height: 22px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* line 208, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+textarea.form-control {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Fix inline-block on inline forms
+   Most commonly used on date select fields */
+/* line 215, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.form-inline .form-control {
+  display: inline-block;
+  zoom: 1;
+  display: inline;
+}
+
+/* line 222, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.container,
+.container-fluid {
+  zoom: 1;
+  width: 940px;
+}
+
+/* line 227, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.container-fluid {
+  width: 970px;
+}
+
+/* line 232, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+header .container,
+header .container-fluid {
+  width: auto;
+}
+
+/* line 236, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.row {
+  zoom: 1;
+}
+
+/* line 240, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.dl-horizontal {
+  zoom: 1;
+}
+
+/* line 244, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.help-block {
+  display: inline;
+  zoom: 1;
+}
+
+/* line 249, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.form-horizontal .form-group {
+  zoom: 1;
+}
+
+/* line 253, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.dropdown-toggle {
+  margin-bottom: -3px;
+}
+
+/* line 257, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.dropdown-menu .divider {
+  width: 100%;
+  margin: -5px 0 5px;
+}
+
+/* line 262, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.list-group {
+  margin-left: 0;
+}
+
+/* line 266, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+ul .list-group-item {
+  list-style: none;
+}
+
+/* line 270, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.sr-only {
+  clip: rect(0 0 0 0);
+}
+
+/* line 274, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.list-inline > li {
+  display: inline;
+  zoom: 1;
+}
+
+/* Cleanup navigation tabs
+  * Clear container
+  * Give selected tab more contrast and hide faulty border-top
+*/
+/* line 284, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.nav-tabs {
+  overflow: hidden;
+}
+
+/* line 288, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.nav-tabs li.active a {
+  background: #ddd;
+  border: 1px solid #ddd;
+}
+
+/*
+  Cleanup breadcrumb
+  * Remove default indent for unordered list
+  * Display breadcrumbs inline with some margin, generated
+    content doesn't appear, so there's no divider.
+*/
+/* line 300, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.breadcrumb > li {
+  display: inline;
+  margin-right: 10px;
+}
+
+/*
+  Fix glyphicons via generated content fallback
+  Background on this fix: https://github.com/FortAwesome/Font-Awesome/issues/38
+*/
+/* line 311, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon {
+  text-decoration: inherit;
+  line-height: normal;
+}
+
+/* line 315, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-adjust {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe063;');
+}
+
+/* line 318, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-align-center {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe053;');
+}
+
+/* line 321, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-align-justify {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe055;');
+}
+
+/* line 324, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-align-left {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe052;');
+}
+
+/* line 327, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-align-right {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe054;');
+}
+
+/* line 330, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-arrow-down {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe094;');
+}
+
+/* line 333, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-arrow-left {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe091;');
+}
+
+/* line 336, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-arrow-right {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe092;');
+}
+
+/* line 339, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-arrow-up {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe093;');
+}
+
+/* line 342, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-asterisk {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#x002a;');
+}
+
+/* line 345, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-backward {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe071;');
+}
+
+/* line 348, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-ban-circle {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe090;');
+}
+
+/* line 351, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-barcode {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe040;');
+}
+
+/* line 354, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-bell {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe123;');
+}
+
+/* line 357, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-bold {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe048;');
+}
+
+/* line 360, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-book {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe043;');
+}
+
+/* line 363, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-bookmark {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe044;');
+}
+
+/* line 366, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-briefcase {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe139;');
+}
+
+/* line 369, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-bullhorn {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe122;');
+}
+
+/* line 372, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-calendar {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe109;');
+}
+
+/* line 375, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-camera {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe046;');
+}
+
+/* line 378, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-certificate {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe124;');
+}
+
+/* line 381, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-check {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe067;');
+}
+
+/* line 384, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-chevron-down {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe114;');
+}
+
+/* line 387, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-chevron-left {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe079;');
+}
+
+/* line 390, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-chevron-right {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe080;');
+}
+
+/* line 393, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-chevron-up {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe113;');
+}
+
+/* line 396, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-circle-arrow-down {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe134;');
+}
+
+/* line 399, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-circle-arrow-left {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe132;');
+}
+
+/* line 402, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-circle-arrow-right {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe131;');
+}
+
+/* line 405, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-circle-arrow-up {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe133;');
+}
+
+/* line 408, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-cloud {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#x2601;');
+}
+
+/* line 411, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-cloud-download {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe197;');
+}
+
+/* line 414, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-cloud-upload {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe198;');
+}
+
+/* line 417, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-cog {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe019;');
+}
+
+/* line 420, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-collapse {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe159;');
+}
+
+/* line 423, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-collapse-down {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe159;');
+}
+
+/* line 426, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-collapse-top {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe160;');
+}
+
+/* line 429, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-collapse-up {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe160;');
+}
+
+/* line 432, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-comment {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe111;');
+}
+
+/* line 435, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-compressed {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe181;');
+}
+
+/* line 438, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-copyright-mark {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe194;');
+}
+
+/* line 441, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-credit-card {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe177;');
+}
+
+/* line 444, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-cutlery {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe179;');
+}
+
+/* line 447, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-dashboard {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe141;');
+}
+
+/* line 450, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-download {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe026;');
+}
+
+/* line 453, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-download-alt {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe025;');
+}
+
+/* line 456, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-earphone {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe182;');
+}
+
+/* line 459, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-edit {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe065;');
+}
+
+/* line 462, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-eject {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe078;');
+}
+
+/* line 465, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-envelope {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#x2709;');
+}
+
+/* line 468, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-euro {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#x20ac;');
+}
+
+/* line 471, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-exclamation-sign {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe101;');
+}
+
+/* line 474, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-expand {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe158;');
+}
+
+/* line 477, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-export {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe170;');
+}
+
+/* line 480, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-eye-close {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe106;');
+}
+
+/* line 483, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-eye-open {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe105;');
+}
+
+/* line 486, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-facetime-video {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe059;');
+}
+
+/* line 489, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-fast-backward {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe070;');
+}
+
+/* line 492, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-fast-forward {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe076;');
+}
+
+/* line 495, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-file {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe022;');
+}
+
+/* line 498, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-film {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe009;');
+}
+
+/* line 501, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-filter {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe138;');
+}
+
+/* line 504, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-fire {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe104;');
+}
+
+/* line 507, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-flag {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe034;');
+}
+
+/* line 510, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-flash {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe162;');
+}
+
+/* line 513, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-floppy-disk {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe172;');
+}
+
+/* line 516, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-floppy-open {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe176;');
+}
+
+/* line 519, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-floppy-remove {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe174;');
+}
+
+/* line 522, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-floppy-save {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe175;');
+}
+
+/* line 525, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-floppy-saved {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe173;');
+}
+
+/* line 528, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-folder-close {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe117;');
+}
+
+/* line 531, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-folder-open {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe118;');
+}
+
+/* line 534, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-font {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe047;');
+}
+
+/* line 537, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-forward {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe075;');
+}
+
+/* line 540, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-fullscreen {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe140;');
+}
+
+/* line 543, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-gbp {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe149;');
+}
+
+/* line 546, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-gift {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe102;');
+}
+
+/* line 549, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-glass {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe001;');
+}
+
+/* line 552, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-globe {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe135;');
+}
+
+/* line 555, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-hand-down {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe130;');
+}
+
+/* line 558, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-hand-left {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe128;');
+}
+
+/* line 561, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-hand-right {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe127;');
+}
+
+/* line 564, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-hand-up {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe129;');
+}
+
+/* line 567, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-hdd {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe121;');
+}
+
+/* line 570, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-hd-video {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe187;');
+}
+
+/* line 573, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-header {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe180;');
+}
+
+/* line 576, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-headphones {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe035;');
+}
+
+/* line 579, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-heart {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe005;');
+}
+
+/* line 582, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-heart-empty {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe143;');
+}
+
+/* line 585, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-home {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe021;');
+}
+
+/* line 588, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-import {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe169;');
+}
+
+/* line 591, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-inbox {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe028;');
+}
+
+/* line 594, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-indent-left {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe057;');
+}
+
+/* line 597, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-indent-right {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe058;');
+}
+
+/* line 600, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-info-sign {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe086;');
+}
+
+/* line 603, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-italic {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe049;');
+}
+
+/* line 606, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-leaf {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe103;');
+}
+
+/* line 609, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-link {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe144;');
+}
+
+/* line 612, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-list {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe056;');
+}
+
+/* line 615, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-list-alt {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe032;');
+}
+
+/* line 618, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-lock {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe033;');
+}
+
+/* line 621, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-log-in {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe161;');
+}
+
+/* line 624, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-log-out {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe163;');
+}
+
+/* line 627, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-magnet {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe112;');
+}
+
+/* line 630, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-map-marker {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe062;');
+}
+
+/* line 633, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-minus {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#x2212;');
+}
+
+/* line 636, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-minus-sign {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe082;');
+}
+
+/* line 639, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-move {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe068;');
+}
+
+/* line 642, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-music {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe002;');
+}
+
+/* line 645, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-new-window {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe164;');
+}
+
+/* line 648, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-off {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe017;');
+}
+
+/* line 651, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-ok {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe013;');
+}
+
+/* line 654, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-ok-circle {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe089;');
+}
+
+/* line 657, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-ok-sign {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe084;');
+}
+
+/* line 660, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-open {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe167;');
+}
+
+/* line 663, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-paperclip {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe142;');
+}
+
+/* line 666, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-pause {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe073;');
+}
+
+/* line 669, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-pencil {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#x270f;');
+}
+
+/* line 672, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-phone {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe145;');
+}
+
+/* line 675, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-phone-alt {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe183;');
+}
+
+/* line 678, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-picture {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe060;');
+}
+
+/* line 681, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-plane {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe108;');
+}
+
+/* line 684, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-play {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe072;');
+}
+
+/* line 687, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-play-circle {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe029;');
+}
+
+/* line 690, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-plus {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#x002b;');
+}
+
+/* line 693, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-plus-sign {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe081;');
+}
+
+/* line 696, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-print {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe045;');
+}
+
+/* line 699, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-pushpin {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe146;');
+}
+
+/* line 702, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-qrcode {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe039;');
+}
+
+/* line 705, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-question-sign {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe085;');
+}
+
+/* line 708, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-random {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe110;');
+}
+
+/* line 711, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-record {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe165;');
+}
+
+/* line 714, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-refresh {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe031;');
+}
+
+/* line 717, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-registration-mark {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe195;');
+}
+
+/* line 720, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-remove {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe014;');
+}
+
+/* line 723, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-remove-circle {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe088;');
+}
+
+/* line 726, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-remove-sign {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe083;');
+}
+
+/* line 729, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-repeat {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe030;');
+}
+
+/* line 732, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-resize-full {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe096;');
+}
+
+/* line 735, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-resize-horizontal {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe120;');
+}
+
+/* line 738, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-resize-small {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe097;');
+}
+
+/* line 741, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-resize-vertical {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe119;');
+}
+
+/* line 744, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-retweet {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe115;');
+}
+
+/* line 747, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-road {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe024;');
+}
+
+/* line 750, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-save {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe166;');
+}
+
+/* line 753, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-saved {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe168;');
+}
+
+/* line 756, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-screenshot {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe087;');
+}
+
+/* line 759, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-sd-video {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe186;');
+}
+
+/* line 762, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-search {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe003;');
+}
+
+/* line 765, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-send {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe171;');
+}
+
+/* line 768, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-share {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe066;');
+}
+
+/* line 771, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-share-alt {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe095;');
+}
+
+/* line 774, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-shopping-cart {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe116;');
+}
+
+/* line 777, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-signal {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe018;');
+}
+
+/* line 780, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-sort {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe150;');
+}
+
+/* line 783, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-sort-by-alphabet {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe151;');
+}
+
+/* line 786, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-sort-by-alphabet-alt {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe152;');
+}
+
+/* line 789, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-sort-by-attributes {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe155;');
+}
+
+/* line 792, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-sort-by-attributes-alt {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe156;');
+}
+
+/* line 795, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-sort-by-order {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe153;');
+}
+
+/* line 798, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-sort-by-order-alt {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe154;');
+}
+
+/* line 801, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-sound-5-1 {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe191;');
+}
+
+/* line 804, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-sound-6-1 {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe192;');
+}
+
+/* line 807, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-sound-7-1 {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe193;');
+}
+
+/* line 810, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-sound-dolby {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe190;');
+}
+
+/* line 813, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-sound-stereo {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe189;');
+}
+
+/* line 816, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-star {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe006;');
+}
+
+/* line 819, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-star-empty {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe007;');
+}
+
+/* line 822, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-stats {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe185;');
+}
+
+/* line 825, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-step-backward {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe069;');
+}
+
+/* line 828, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-step-forward {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe077;');
+}
+
+/* line 831, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-stop {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe074;');
+}
+
+/* line 834, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-subtitles {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe188;');
+}
+
+/* line 837, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-tag {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe041;');
+}
+
+/* line 840, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-tags {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe042;');
+}
+
+/* line 843, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-tasks {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe137;');
+}
+
+/* line 846, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-text-height {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe050;');
+}
+
+/* line 849, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-text-width {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe051;');
+}
+
+/* line 852, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-th {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe011;');
+}
+
+/* line 855, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-th-large {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe010;');
+}
+
+/* line 858, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-th-list {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe012;');
+}
+
+/* line 861, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-thumbs-down {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe126;');
+}
+
+/* line 864, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-thumbs-up {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe125;');
+}
+
+/* line 867, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-time {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe023;');
+}
+
+/* line 870, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-tint {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe064;');
+}
+
+/* line 873, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-tower {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe184;');
+}
+
+/* line 876, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-transfer {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe178;');
+}
+
+/* line 879, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-trash {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe020;');
+}
+
+/* line 882, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-tree-conifer {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe199;');
+}
+
+/* line 885, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-tree-deciduous {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe200;');
+}
+
+/* line 888, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-unchecked {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe157;');
+}
+
+/* line 891, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-upload {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe027;');
+}
+
+/* line 894, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-usd {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe148;');
+}
+
+/* line 897, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-user {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe008;');
+}
+
+/* line 900, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-volume-down {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe037;');
+}
+
+/* line 903, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-volume-off {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe036;');
+}
+
+/* line 906, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-volume-up {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe038;');
+}
+
+/* line 909, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-warning-sign {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe107;');
+}
+
+/* line 912, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-wrench {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe136;');
+}
+
+/* line 915, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-zoom-in {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe015;');
+}
+
+/* line 918, /Users/stephen/.rvm/gems/ruby-2.0.0-p648/gems/govuk_admin_template-3.5.0/app/assets/stylesheets/govuk_admin_template/bootstrap-ie7.scss */
+.glyphicon-zoom-out {
+  zoom: expression(this.runtimeStyle['zoom']='1',this.innerHTML='&#xe016;');
+}
