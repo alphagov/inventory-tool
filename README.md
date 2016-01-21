@@ -24,12 +24,24 @@ update the spreadsheets.
 
 `bundle exec rake`
 
+## Deployment
+
+This is deployed to Heroku by adding the relevant remotes and then pushing the branch
+
+  git remote add heroku git@heroku.com:inventory-tool.git
+  git push heroku master
+
+or if you wanted to deploy branch with name 'my-branch'
+
+  git push heroku my-branch:master
+
+
 ## Licence
 
 [MIT License](LICENCE)
 
 
-## Authentication
+## Google Authentication
 
 See the wiki: https://gov-uk.atlassian.net/wiki/pages/createpage.action?spaceKey=FS&fromPageId=44761298
 
