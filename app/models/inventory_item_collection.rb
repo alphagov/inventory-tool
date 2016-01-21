@@ -14,7 +14,6 @@ class InventoryItemCollection
   end
 
   def self.new_from_spreadsheet(inventory_id, array_of_rows)
-    ActivityLog.debug ">>>>>>>>>>>>>>>> new from spreadsheet <<<<<<<<<<<<<<<<<<"    
     iic = new(:sheet)
     array_of_rows.each do |row|
       item = InventoryItem.new_from_spreadsheet_row(inventory_id, row)
@@ -24,10 +23,10 @@ class InventoryItemCollection
   end
 
   def self.new_from_search_queries(inventory, query_rows)
-    ActivityLog.debug ">>>>>>>>>>>>>>>> new from spreadsheet queries: #{@query_rows.inspect} <<<<<<<<<<<<<<<<<<"    
     inventory.log :info, "#{self} instantiating from queries"
     iic = new(:query)
     query_rows.each_with_index do |query_row, index|
+      next if query_row.empty?
       ActivityLog.debug  "instantiating search client with #{query_row.query}", inventory.id
       search_results = Rummager::SearchApiClient.new(inventory.id, query_row.query).search
       inventory.log :info, "#{self} Adding #{search_results.size} results from query #{query_row.name}"

@@ -1,5 +1,6 @@
 TODO
-
+- don't process empty queries
+- enable param in log display to display DEBUGs
 - transfer all spreadsheets to be owned by Chris Thorne
 - write up deploy process
 
