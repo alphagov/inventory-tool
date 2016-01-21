@@ -12,7 +12,7 @@ class InventoryItem
 
   FIELD_POSITIONS = [ :title, :url, :description, :first_published_date, :last_updated, 
     :organisations, :format, :display_type, :policies, :topics, :mainstream_browse_pages, :document_collections,
-    :is_withdrawn, :in_history_mode, :matching_queries, :recommendation, :redirect_combine_url, :notes ]
+    :is_withdrawn, :in_history_mode, :matching_queries, :relevance, :recommendation, :redirect_combine_url, :notes ]
 
   # fields on this model that can be updated from an InventoryItem created from a more recent search
   UPDATABLE_FIELDS = [ :title, :last_updated, :format, :display_type, :description,
@@ -50,6 +50,7 @@ class InventoryItem
       end
     end
     params[:url] = row[1].sub(GOVUK_BASE_URL, '')
+    params.except!(nil)     # gets rid of any nil keys caused by adding rows to the right
     InventoryItem.send(:new, params)
   end
 
