@@ -30,7 +30,7 @@ class InventoryItem
 
   # extra fields we ask for from rummager when doing the search query
   ADDITIONAL_QUERY_FIELDS = [ :link, :title, :description, :public_timestamp, :format, :display_type,  
-    :topics, :mainstream_browse_pages, :organisations, :policies, :document_collections ].join(',')
+    :specialist_sectors, :mainstream_browse_pages, :organisations, :policies, :document_collections ].join(',')
 
   attr_accessor *FIELD_POSITIONS
 
@@ -67,7 +67,7 @@ class InventoryItem
     @last_updated = doc['public_timestamp'].nil? ? nil : Time.parse(doc['public_timestamp']) 
     @format = extract_field(doc, 'format').humanize
     @display_type = extract_field(doc, 'display_type', 'None')
-    @topics = extract_from_array_of_hashes(doc, 'topics', 'title', 'slug')
+    @topics = extract_from_array_of_hashes(doc, 'specialist_sectors', 'title', 'slug')
     @mainstream_browse_pages = doc['mainstram_browse_page'] || []
     @organisations = extract_from_array_of_hashes(doc, 'organisations', 'acronym')
     @policies = doc['policies'].nil? ? [] : doc['policies'].sort
@@ -79,6 +79,7 @@ class InventoryItem
     @recommendation = ''
     @redirect_combine_url = ''
     @notes = ''
+    @relevance = ''
   end
 
   def <=>(other)
@@ -176,25 +177,4 @@ private
   def capitalize_first(string)
     string.slice(0,1).capitalize + string.slice(1..-1)
   end
-
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

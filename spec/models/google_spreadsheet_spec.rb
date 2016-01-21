@@ -57,9 +57,7 @@ RSpec.describe GoogleSpreadsheet, type: :model do
       allow(documents_ws).to receive(:num_cols).and_return(18)
       allow(documents_ws).to receive(:update_cells)
       allow(overview_ws).to receive(:[]=)
-      allow(queries_ws).to receive(:[]=)
       expect(overview_ws).to receive(:save)
-      expect(queries_ws).to receive(:save)
       expect(documents_ws).to receive(:save)
 
       GoogleSpreadsheet.create_from_skeleton('my dupe')
@@ -187,6 +185,7 @@ RSpec.describe GoogleSpreadsheet, type: :model do
         "", 
         "", 
         "2; 3", 
+        nil,
         "this is the recommendation that we have come up with", 
         "/early-years/childcare", 
         "These are notes for this item"
@@ -207,6 +206,7 @@ RSpec.describe GoogleSpreadsheet, type: :model do
         "", 
         "", 
         "2; 3",
+        nil,
         "this is the recommendation that we have come up with", 
         "/early-years/childcare", 
         "These are notes for this item"
@@ -226,6 +226,7 @@ RSpec.describe GoogleSpreadsheet, type: :model do
         "", 
         "", 
         "2; 3", 
+        nil,
         "this is the recommendation that we have come up with", 
         "/early-years/childcare", 
         "These are notes for this item"

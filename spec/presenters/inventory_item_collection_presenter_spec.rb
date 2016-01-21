@@ -25,7 +25,7 @@ describe InventoryItemCollectionPresenter do
       expect(chunk).to be_instance_of(Array)
       expect(chunk.map(&:first)).to eq([ 'Dummy Item no. 0', 'Dummy Item no. 1', 'Dummy Item no. 2'])
       row = chunk.first
-      expect(row.size).to eq 18
+      expect(row.size).to eq 19
     end
 
     it 'returns the last chunk of an array of just one row' do
@@ -33,8 +33,8 @@ describe InventoryItemCollectionPresenter do
       expect(chunk).to be_instance_of(Array)
       row = chunk.last
       expect(row.first).to eq 'Dummy Item no. 9'
-      expect(row.size).to eq 18
-    end      
+      expect(row.size).to eq 19
+    end
 
   end
 end

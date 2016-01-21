@@ -21,7 +21,7 @@ describe InventoryItemPresenter do
 
       it 'should return standard array of fields' do
         expect(row).to be_instance_of(Array)
-        expect(row.size).to eq 18
+        expect(row.size).to eq 19
       end
 
       it 'presents values correctly from a fully populated item' do
@@ -52,7 +52,7 @@ describe InventoryItemPresenter do
 
       it 'should return standard array of fields' do
         expect(row).to be_instance_of(Array)
-        expect(row.size).to eq 18
+        expect(row.size).to eq 19
       end
 
       it 'presents values correctly from a fully populated item' do

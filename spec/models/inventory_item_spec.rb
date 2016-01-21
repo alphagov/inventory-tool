@@ -27,6 +27,7 @@ describe InventoryItem do
         "NO", 
         "NO", 
         "2; 4", 
+        "relevance",
         "recs", 
         "combines", 
         "Notes notes and more notes"
@@ -57,7 +58,7 @@ describe InventoryItem do
   describe '.new_from_search_result' do
     context 'population of fields which are missing from the search result' do
     
-      let(:fields_blank_when_missing) { [:redirect_combine_url, :notes, :recommendation ] }
+      let(:fields_blank_when_missing) { [ :relevance, :redirect_combine_url, :notes, :recommendation ] }
       let(:fields_that_must_be_present) { [:url, :matching_queries] }
       let(:fields_that_should_be_an_emtpy_array_when_missing) { InventoryItem::ARRAY_FIELDS - [:matching_queries] }
       let(:fields_that_must_be_false_when_missing) { [:is_withdrawn, :in_history_mode] }
@@ -113,7 +114,7 @@ describe InventoryItem do
           'title' => 'Early years education', 
           'description' => "A guide to eduction for the under 8s",
           'format' => 'detailed_guidance_format',
-          'topics' => [
+          'specialist_sectors' => [
             {
               'link' => '/aardvark-sexing-in-the-early-years',
               'title' => 'aardvark sexing',
