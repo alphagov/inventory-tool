@@ -148,7 +148,6 @@ private
     skeleton = @session.spreadsheet_by_key(SKELETON_KEY)
     @spreadsheet = skeleton.copy(new_title)
     initialize_overview
-    initialize_queries
     clear_existing_documents
     @spreadsheet.title = new_title
     @spreadsheet.acl.push(type: 'domain', value: 'digital.cabinet-office.gov.uk', role: 'writer')
@@ -162,12 +161,4 @@ private
     ws[4,2] = 0
     ws.save
   end
-
-  def initialize_queries
-    ws =  queries_worksheet
-    ws[2,1] = ''
-    ws[3,1] = ''
-    ws.save
-  end
- 
 end
