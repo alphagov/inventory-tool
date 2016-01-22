@@ -18,7 +18,7 @@ describe GoogleCredentials do
 
       expect(Tempfile).to receive(:new).and_return(tempfile)
       expect(tempfile).to receive(:path).and_return('/path/to/my/tempfile')
-      expect(tempfile).to receive(:puts).with(json_credentials)
+      expect(tempfile).to receive(:puts)
       expect(tempfile).to receive(:close)
       expect(tempfile).to receive(:unlink)
 
@@ -27,17 +27,5 @@ describe GoogleCredentials do
       new_session = GoogleCredentials.saved_session
       expect(new_session).to eq session
     end
-  end
-
-  def json_credentials
-    {
-      'client_id' => 'my-client-id',
-      'client_secret' => 'my-client-secret',
-      'scope' =>  [
-        'https://www.googleapis.com/auth/drive',
-        'https://spreadsheets.google.com/feeds/'
-      ],
-      'refresh_token' => '1/AUNh1aOdTESQBa4f4xqE5qVHNGnO-_2dEi4hF1woPYdIgOrJDtdun6zK6XiATCKT'
-    }.to_json
   end
 end
