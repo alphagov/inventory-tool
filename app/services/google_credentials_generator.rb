@@ -1,6 +1,5 @@
 require 'json'
 
-
 # This class facilitates setting up new credentials for Inventory Tool to manipulate spreadsheets.
 # It expects the user to have downloaded a credential file from Google which will look something like this:
 #
@@ -67,9 +66,9 @@ class GoogleCredentialsGenerator
     @client_secret = data['client_secret']
     data['client_secret'] = nil
 
-    fp = File.open('/Users/stephen/src/gds/inventory-tool/config/new-config.json', 'w')
-    fp.write(JSON.pretty_generate(data))
-    fp.close
+    File.open('config/google_drive_config.json', 'w') do |config_file|
+      config_file.write(JSON.pretty_generate(data))
+    end
   end
 
   def check_credentials_are_in_config
