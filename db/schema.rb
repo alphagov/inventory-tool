@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160113141242) do
+ActiveRecord::Schema.define(version: 20160125161626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20160113141242) do
     t.datetime "date_generated"
     t.boolean  "background_job_in_progress", default: false
     t.string   "flash_notes"
-    t.integer  "version"
   end
 
 end
