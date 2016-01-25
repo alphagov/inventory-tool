@@ -1,26 +1,37 @@
 require 'rails_helper'
 
 RSpec.describe InventoriesController, type: :controller do
+  def http_login
+    username = 'test'
+    password = 'test'
+    request.env["HTTP_AUTHORIZATION"] = ActionController::HttpAuthentication::Basic.encode_credentials(username,password)
+  end
+
   describe 'GET index' do
     it 'assigns inventories' do
       create :inventory, name: 'xxxx'
       create :inventory, name: 'aaaa'
       create :skeleton_inventory, name: 'skeleton'
 
+      http_login
       get :index
 
       expect(assigns(:inventories).map(&:name)).to eq %w{ skeleton aaaa xxxx }
     end
 
     it 'assigns inventory' do
+      http_login
       get :index
+
       inventory = assigns(:inventory)
       expect(inventory).to be_instance_of(Inventory)
       expect(inventory.new_record?).to be true
     end
 
     it 'renders the index template' do
+      http_login
       get :index
+
       expect(response).to have_http_status(:success)
       expect(response).to render_template("index")
     end
@@ -28,6 +39,7 @@ RSpec.describe InventoriesController, type: :controller do
     it "writes a record to the Activity log if there is an exception" do
       expect(Inventory).to receive(:all_ordered).and_raise(RuntimeError, 'Dummy Exception')
 
+      http_login
       get :index
 
       log = ActivityLog.last
@@ -46,6 +58,7 @@ RSpec.describe InventoriesController, type: :controller do
       allow(Inventory).to receive(:create_pending).and_return(inventory)
       allow(SpreadsheetCreatorWorker).to receive(:perform_async)
 
+      http_login
       post :create, inventory: {name: 'xyz'}
 
       expect(Inventory).to have_received(:create_pending).with('xyz')
@@ -58,6 +71,7 @@ RSpec.describe InventoriesController, type: :controller do
       allow(Inventory).to receive(:create_pending).and_return(inventory)
       allow(SpreadsheetCreatorWorker).to receive(:perform_async)
 
+      http_login
       post :create, inventory: {name: 'xyz'}
 
       expect(flash[:warning]).to eq "Creation of new spreadsheet 'xyz' has been scheduled. Refresh later to view."
@@ -68,6 +82,8 @@ RSpec.describe InventoriesController, type: :controller do
     
     it 'errrors if name already exists' do
       create :inventory, name: 'abc'
+
+      http_login
       post :create, inventory: {name: 'abc'}
 
       expect(flash).not_to be_empty
@@ -87,12 +103,16 @@ RSpec.describe InventoriesController, type: :controller do
     end
 
     it 'queues a background job' do
+      http_login
       patch :update, id: inventory.id
+
       expect(SpreadsheetMergerWorker).to have_received(:perform_async).with(inventory.id)
     end
 
     it 'marks the inventory record as a background job in progress' do
+      http_login
       patch :update, id: inventory.id
+
       inv = Inventory.find(inventory.id)
 
       expect(inv.background_job_in_progress).to be true
@@ -100,7 +120,9 @@ RSpec.describe InventoriesController, type: :controller do
     end
 
     it 'redirects to the inventories path' do
+      http_login
       patch :update, id: inventory.id
+
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(inventories_path)
     end
@@ -117,6 +139,7 @@ RSpec.describe InventoriesController, type: :controller do
     end
 
     it 'starts a background job' do
+      http_login
       delete :destroy, id: inventory.id
       
       inv = Inventory.find(inventory.id)
@@ -125,12 +148,14 @@ RSpec.describe InventoriesController, type: :controller do
     end
 
     it 'queues a SpreadsheetDeleterWorkerJob' do
+      http_login
       delete :destroy, id: inventory.id
 
       expect(SpreadsheetDeleterWorker).to have_received(:perform_async).with(inventory.id)
     end
 
     it 'updates the flash message' do
+      http_login
       delete :destroy, id: inventory.id
 
       expect(flash[:danger]).to eq "Spreadsheet 'Deletable Spreadsheet' has been queued for deletion."
