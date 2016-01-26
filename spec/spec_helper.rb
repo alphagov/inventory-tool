@@ -99,4 +99,9 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+
+  # Test HTTP basic authentication details
+  # see `app/controllers/inventories_controller.rb`
+  ENV["USERNAME"] = 'test'
+  ENV["PASSWORD"] = 'test'
 end
