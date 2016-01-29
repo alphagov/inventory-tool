@@ -4,12 +4,6 @@ class InventoryItem
 
   GOVUK_BASE_URL = 'https://www.gov.uk'
 
-  # maps incoming fields in the spreadsheet row to attributes on this model
-  V1_FIELD_POSITIONS = [ :url, :title, :last_updated,
-    :format, :display_type, :document_type, :topics, :mainstream_browse_pages,
-    :organisations, :policies, :document_collections, :is_withdrawn, :in_history_mode, 
-    :first_published_date, :matching_queries, :recommendation, :redirect_combine_url, :notes ]
-
   FIELD_POSITIONS = [ :title, :url, :description, :first_published_date, :last_updated, 
     :organisations, :format, :display_type, :policies, :topics, :mainstream_browse_pages, :document_collections,
     :is_withdrawn, :in_history_mode, :matching_queries, :relevance, :recommendation, :redirect_combine_url, :notes ]
