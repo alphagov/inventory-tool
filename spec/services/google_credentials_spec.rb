@@ -10,26 +10,24 @@ describe GoogleCredentials do
   end
 
   describe '.saved_session' do
-    it 'should create and then delete a config file with cient id and secret' do
-      ENV['GOOGLE_DRIVE_CLIENT_ID'] = 'my-client-id'
-      ENV['GOOGLE_DRIVE_CLIENT_SECRET'] = 'my-client-secret'
-      session = double('GoogleDrive Saved Session')
-      tempfile = double(Tempfile)
+    it 'should create and then delete a config file with client id and secret' do
+      allow(ENV).to receive(:[]).with('GOOGLE_DRIVE_CLIENT_ID').and_return('my-client-id')
+      allow(ENV).to receive(:[]).with('GOOGLE_DRIVE_CLIENT_SECRET').and_return('my-client-secret')
+      saved_session = double('GoogleDrive Saved Session')
+      dummy_tempfile = double(Tempfile)
+      allow(Tempfile).to receive(:new).and_return(dummy_tempfile)
+      allow(dummy_tempfile).to receive(:path).and_return('/path/to/my/dummy_tempfile')
 
-      expect(Tempfile).to receive(:new).and_return(tempfile)
-      expect(tempfile).to receive(:path).and_return('/path/to/my/tempfile')
-      expect(tempfile).to receive(:close)
-      expect(tempfile).to receive(:unlink)
-      expect(tempfile).to receive(:puts) do |file|
+      expect(dummy_tempfile).to receive(:puts) do |file|
         file_content = JSON.parse file
         expect(file_content).to include('client_id' => 'my-client-id')
         expect(file_content).to include('client_secret' => 'my-client-secret')
       end
+      expect(dummy_tempfile).to receive(:close)
+      expect(dummy_tempfile).to receive(:unlink)
+      expect(GoogleDrive).to receive(:saved_session).with('/path/to/my/dummy_tempfile').and_return(saved_session)
 
-      expect(GoogleDrive).to receive(:saved_session).with('/path/to/my/tempfile').and_return(session)
-
-      new_session = GoogleCredentials.saved_session
-      expect(new_session).to eq session
+      expect(GoogleCredentials.saved_session).to eq saved_session
     end
   end
 end
