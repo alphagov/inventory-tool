@@ -95,7 +95,7 @@ class InventoryItem
 
 private
   def remove_not_returned
-    @notes.gsub!(/Not returned from search as of .*;\s/, '')
+    @notes.gsub!(/Not returned from search as of .*;\s/, '') if @notes
   end
   
   def update_updatable_fields(other_item)
