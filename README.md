@@ -15,25 +15,33 @@ update the spreadsheets.
 
 ### Running the application
 
+```sh
     redis-server
     bundle exec sidekiq
     bundle exec rails s
+```
 
 
 ### Running the test suite
 
-`bundle exec rake`
+```sh
+bundle exec rake
+```
 
 ## Deployment
 
 This is deployed to Heroku by adding the relevant remotes and then pushing the branch
 
+```sh
   git remote add heroku git@heroku.com:inventory-tool.git
   git push heroku master
+```
 
 or if you wanted to deploy branch with name 'my-branch'
 
+```sh
   git push heroku my-branch:master
+```
 
 
 ## Licence
