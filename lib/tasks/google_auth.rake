@@ -1,4 +1,5 @@
 require File.dirname(__FILE__) + '/../../app/services/google_credentials_generator'
+require File.dirname(__FILE__) + '/../../app/services/google_credentials'
 require File.dirname(__FILE__) + '/../../app/models/google_spreadsheet'
 
 namespace :google do
