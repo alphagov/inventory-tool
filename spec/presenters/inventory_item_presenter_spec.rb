@@ -4,19 +4,15 @@ require 'support/inventory_item_spec_helper'
 describe InventoryItemPresenter do
   include InventoryItemSpecHelper
 
-  
   let(:presenter) { InventoryItemPresenter.new(item) }
   let(:row) { presenter.present }
 
-  
   def index_for(field)
     InventoryItem::FIELD_POSITIONS.index(field)
   end
 
-
   describe '#present' do
     context 'fully populated item' do
-      
       let(:item) { build_inventory_item }
 
       it 'should return standard array of fields' do
@@ -29,7 +25,7 @@ describe InventoryItemPresenter do
         expect(row[index_for(:title)]).to eq 'My Dummy Inventory Item'
         expect(row[index_for(:last_updated)]).to eq '2015-12-25 08:36'
         expect(row[index_for(:format)]).to eq 'Speech'
-        expect(row[index_for(:display_type)]).to eq 'Detailed guide' 
+        expect(row[index_for(:display_type)]).to eq 'Detailed guide'
         expect(row[index_for(:topics)]).to eq 'first topic; last topic; middle topic'
         expect(row[index_for(:mainstream_browse_pages)]).to eq 'births-deaths-marriages/child-adoption; education/school-life'
         expect(row[index_for(:organisations)]).to eq 'DfE; HMRC; MOJ'
@@ -77,12 +73,11 @@ describe InventoryItemPresenter do
     end
 
     context 'true booleans' do
-
       let(:item) { build_inventory_item(is_withdrawn: true, in_history_mode: true) }
-      
+
       it 'should translate true to YES' do
         expect(row[index_for(:is_withdrawn)]).to eq 'Withdrawn'
-        expect(row[index_for(:in_history_mode)]).to eq 'History mode' 
+        expect(row[index_for(:in_history_mode)]).to eq 'History mode'
       end
     end
   end

@@ -1,13 +1,12 @@
 class SpreadsheetMigratorWorker
-
   V1_FIELD_POSITIONS = [ :url, :title, :last_updated,
     :format, :display_type, :document_type, :topics, :mainstream_browse_pages,
-    :organisations, :policies, :document_collections, :is_withdrawn, :in_history_mode, 
+    :organisations, :policies, :document_collections, :is_withdrawn, :in_history_mode,
     :first_published_date, :matching_queries, :recommendation, :redirect_combine_url, :notes ]
 
-  FIELD_POSITIONS = [ :title, :url, :description, :first_published_date, :last_updated, 
+  FIELD_POSITIONS = [ :title, :url, :description, :first_published_date, :last_updated,
     :organisations, :format, :display_type, :policies, :topics, :mainstream_browse_pages,
-    :document_collections, :is_withdrawn, :in_history_mode, :matching_queries, 
+    :document_collections, :is_withdrawn, :in_history_mode, :matching_queries,
     :recommendation, :redirect_combine_url, :notes ]
 
   COLUMN_HEADINGS = [
@@ -32,13 +31,11 @@ class SpreadsheetMigratorWorker
   ]
 
   SKELETON_KEY = '1PpwUgdqidkKRU6BuxeKxqpvyoCJ9khxcJLPg5W9FKVI'
-  
-
 
   def run
     invs = Inventory.where(version: 1)
     invs.each do |inv|
-      puts ">>>>>>>>>>>>>> PROCESSING #{inv.name} <<<<<<<< #{__FILE__}::#{__LINE__} <<<<<<<<<\n" 
+      puts ">>>>>>>>>>>>>> PROCESSING #{inv.name} <<<<<<<< #{__FILE__}::#{__LINE__} <<<<<<<<<\n"
       migrate(inv.id)
     end
   end
@@ -48,7 +45,7 @@ private
     inventory = Inventory.find inventory_id
     inventory.log(:warn, "Migrating #{inventory.name} from old format to new format")
     session = GoogleCredentials.saved_session
-    
+
     # make a copy and change the title of the old spreadsheet
     v1_spreadsheet = session.spreadsheet_by_key(inventory.key)
     v2_spreadsheet = v1_spreadsheet.copy("_NEW_#{v1_spreadsheet.title}")
@@ -58,7 +55,7 @@ private
     ws.delete
 
     # create a new documents worksheet
-    ws = v2_spreadsheet.add_worksheet('Documents')    
+    ws = v2_spreadsheet.add_worksheet('Documents')
 
     # update the spreadsheet with the new column titles
     new_rows = []
@@ -78,8 +75,7 @@ private
     Inventory.create(name: v2_spreadsheet.title, key: v2_spreadsheet.key, is_skeleton: false, version: 2)
   end
 
-  private
-
+private
   def transform_row(row)
     new_row = []
     FIELD_POSITIONS.each do |fieldname|

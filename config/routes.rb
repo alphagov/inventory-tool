@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
-  
   root to: 'inventories#index'
 
-  # get 'inventories', to: 'inventories#index'
   resources :inventories, only: [:index, :create, :update, :destroy]
 
   if Rails.env.development?

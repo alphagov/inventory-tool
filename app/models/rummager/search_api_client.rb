@@ -1,9 +1,7 @@
 require 'cgi'
 
 module Rummager
-
   class SearchApiClient
-
     SEARCH_ENDPOINT = 'https://www.gov.uk/api/search.json'
     MAX_REQUIRED_RESULTS = 200_000
 

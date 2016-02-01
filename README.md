@@ -52,5 +52,3 @@ or if you wanted to deploy branch with name 'my-branch'
 ## Google Authentication
 
 See the wiki: https://gov-uk.atlassian.net/wiki/pages/createpage.action?spaceKey=FS&fromPageId=44761298
-
-

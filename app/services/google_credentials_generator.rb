@@ -1,40 +1,6 @@
 require 'json'
 
-# This class facilitates setting up new credentials for Inventory Tool to manipulate spreadsheets.
-# It expects the user to have downloaded a credential file from Google which will look something like this:
-#
-#  {
-#     "installed":{
-#       "client_id":"11111111111-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com",
-#       "project_id":"inventory-tool",
-#       "auth_uri":"https://accounts.google.com/o/oauth2/auth",
-#       "token_uri":"https://accounts.google.com/o/oauth2/token",
-#       "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
-#       "client_secret":"AAAAAAAAAAAAAA",
-#       "redirect_uris":["urn:ietf:wg:oauth:2.0:oob","http://localhost"]
-#     }
-# }
-#
-# When we try to instantiate a Google saved session with this file, it will print a url to the console and expect the 
-# user to copy and paste it into a browser.  The browser will display a refresh code, which the user should paste into the 
-# consle.  The Google auth service will then change the file into something like this:
-#
-# {
-#   "client_id": "681107555901-cko1uonabe9a33aalgep7kfmrulptdgu.apps.googleusercontent.com",  
-#   "client_secret": "1U3-Krii5x1oLPrwD5zgn-ry",
-#   "scope": [
-#     "https://www.googleapis.com/auth/drive",
-#     "https://spreadsheets.google.com/feeds/"
-#   ],
-#   "refresh_token": "1/HDRmaU_jQEjTBWlW9HtBUpIp3JkyYJE9KercWqiYhwk"
-# }
-#
-# This class will then modify the file to replade the client id and client secret with environment variable names and print to the console the 
-# environment variable names and values that should be set up.
-#
-
 class GoogleCredentialsGenerator
-
   def initialize
     @client_id = nil
     @client_secret = nil
@@ -48,9 +14,7 @@ class GoogleCredentialsGenerator
     display_env_vars
   end
 
-
-  private
-
+private
   def display_env_vars
     puts "The /config/google_drive_config.json has been transformed and is now safe to check into GitHub."
     puts "\n"
@@ -76,7 +40,6 @@ class GoogleCredentialsGenerator
     check_valid_newly_downloaded_config
     confirm_correct_date
   end
-
 
   def check_config_file_exists
     unless File.exist?(GoogleSpreadsheet::GOOGLE_DRIVE_CONFIG_FILE)
@@ -111,5 +74,4 @@ class GoogleCredentialsGenerator
     STDIN.gets
     GoogleCredentials.authenticate_new_credentials
   end
-
 end

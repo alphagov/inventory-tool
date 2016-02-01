@@ -1,8 +1,6 @@
 require 'rails_helper'
 
-
 describe QueryRow do
-
   describe '#name' do
     it 'returns the description if present' do
       qr = QueryRow.new(['q="Early years"', 'Full early years'])
@@ -36,5 +34,4 @@ describe QueryRow do
       expect(qr).not_to be_empty
     end
   end
-  
 end

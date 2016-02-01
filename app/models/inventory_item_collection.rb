@@ -54,7 +54,7 @@ class InventoryItemCollection
     if @collection.key?(item.url)
       ActivityLog.warn "Merging duplicate url: #{item.url}", inventory_id
     end
-    @collection[item.url] = item    
+    @collection[item.url] = item
   end
 
   def merge_collections!(query_collection)
@@ -78,12 +78,9 @@ private
     end
   end
 
-  # updates this collection with data from an item from the query collection
   def update_item(query_collection_item)
-    # get the corresponding item in this collection
     item = @collection[query_collection_item.url]
     if item.nil?
-      # item doesn't exist, so just add it
       @collection[query_collection_item.url] = query_collection_item
     else
       item.update_from_other_item(query_collection_item)

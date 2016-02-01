@@ -8,13 +8,12 @@ RSpec.describe GoogleSpreadsheet, type: :model do
   let(:overview_ws) { double('GoogleDrive::Worksheet(Overview)', save: nil) }
   let(:documents_ws) { double('GoogleDrive::Worksheet(Documents)', num_rows: 85, num_cols: 18, save: nil ) }
   let(:queries_ws) { double('GoogleDrive::Worksheet(Queries)', num_rows: 2) }
-  let(:spreadsheet) { double(GoogleDrive::Spreadsheet, 
-    overview_worksheet: overview_ws, 
-    documents_worksheet: documents_ws, 
+  let(:spreadsheet) { double(GoogleDrive::Spreadsheet,
+    overview_worksheet: overview_ws,
+    documents_worksheet: documents_ws,
     queries_worksheet: queries_ws) }
   let(:inventory) { double Inventory }
 
-  
   before(:each) do
     allow(GoogleDrive).to receive(:saved_session).and_return(session)
     allow(spreadsheet).to receive(:worksheet_by_title).with('Overview').and_return(overview_ws)
@@ -75,9 +74,6 @@ RSpec.describe GoogleSpreadsheet, type: :model do
       expect(documents_ws).to receive(:update_cells).with(2, 1, Array.new(4, Array.new(18, nil)))
       expect(documents_ws).to receive(:max_rows=).with(5)
 
-      # expect_any_instance_of(InventoryItemCollectionPresenter).to receive(:present).and_return('Dummy row data')
-      
-      # expect(documents_ws).to receive(:update_cells).with(2, 1, 'Dummy row data')
       expect(documents_ws).to receive(:update_cells).with(2, 1, chunk)
       expect(documents_ws).to receive(:save).exactly(3)
 
@@ -85,7 +81,7 @@ RSpec.describe GoogleSpreadsheet, type: :model do
     end
   end
 
-  describe 'calculate_overview_stats' do 
+  describe 'calculate_overview_stats' do
     it 'should gather the stats and put the results in the overview spreadsheet' do
       now = Time.now
         Timecop.freeze(now) do
@@ -103,14 +99,12 @@ RSpec.describe GoogleSpreadsheet, type: :model do
     end
   end
 
-
-
   context 'spreadsheet access methods' do
     let(:gs) { GoogleSpreadsheet.find_by_key('my-key') }
 
     before(:each) do
       allow(session).to receive(:spreadsheet_by_key).with('my-key').and_return(spreadsheet)
-      
+
     end
 
     describe '#delete' do
@@ -157,12 +151,12 @@ RSpec.describe GoogleSpreadsheet, type: :model do
         expect(gs.instance_variable_get(:@inventory)).to be_nil
         expect(gs.inventory).to eq inventory
       end
-      
+
       it 'should return the cached value for inventory if not nil' do
-      gs = GoogleSpreadsheet.find_by_key(inventory.key)
-      gs.instance_variable_set(:@inventory, 'my-inventory')
-      expect(Inventory).not_to receive(:find_by!).with({key: 'my-key'})
-      expect(gs.inventory).to eq 'my-inventory'
+        gs = GoogleSpreadsheet.find_by_key(inventory.key)
+        gs.instance_variable_set(:@inventory, 'my-inventory')
+        expect(Inventory).not_to receive(:find_by!).with({key: 'my-key'})
+        expect(gs.inventory).to eq 'my-inventory'
       end
     end
   end
@@ -170,92 +164,67 @@ RSpec.describe GoogleSpreadsheet, type: :model do
   def chunk
     [
       [
-        "Dummy Item no. 0", 
-        "https://www.gov.uk/dummy/0", 
-        nil, 
-        "2015-01-01", 
-        "2015-12-25 08:36", 
-        "DfE; HMRC; MOJ", 
-        "Speech", 
-        "Detailed guide", 
-        "childcare-and-early-education; special-educational-needs-and-disability-send", 
-        "first topic; last topic; middle topic", 
-        "births-deaths-marriages/child-adoption; education/school-life", 
-        "Early years and childcare inspections: resources for inspectors and other organisations; Ofsted inspections of registered childcare providers; Ofsted's compliance, investigation and enforcement handbooks", 
-        "", 
-        "", 
-        "2; 3", 
+        "Dummy Item no. 0",
+        "https://www.gov.uk/dummy/0",
         nil,
-        "this is the recommendation that we have come up with", 
-        "/early-years/childcare", 
-        "These are notes for this item"
-      ], 
-      [
-        "Dummy Item no. 1", 
-        "https://www.gov.uk/dummy/1", 
-        nil, 
-        "2015-01-01", 
-        "2015-12-25 08:36", 
-        "DfE; HMRC; MOJ", 
-        "Speech", 
-        "Detailed guide", 
-        "childcare-and-early-education; special-educational-needs-and-disability-send", 
-        "first topic; last topic; middle topic", 
-        "births-deaths-marriages/child-adoption; education/school-life", 
+        "2015-01-01",
+        "2015-12-25 08:36",
+        "DfE; HMRC; MOJ",
+        "Speech",
+        "Detailed guide",
+        "childcare-and-early-education; special-educational-needs-and-disability-send",
+        "first topic; last topic; middle topic",
+        "births-deaths-marriages/child-adoption; education/school-life",
         "Early years and childcare inspections: resources for inspectors and other organisations; Ofsted inspections of registered childcare providers; Ofsted's compliance, investigation and enforcement handbooks",
-        "", 
-        "", 
+        "",
+        "",
         "2; 3",
         nil,
-        "this is the recommendation that we have come up with", 
-        "/early-years/childcare", 
+        "this is the recommendation that we have come up with",
+        "/early-years/childcare",
         "These are notes for this item"
-      ], 
+      ],
       [
-        "Dummy Item no. 2", "https://www.gov.uk/dummy/2", 
-        nil, 
-        "2015-01-01", 
-        "2015-12-25 08:36", 
-        "DfE; HMRC; MOJ", 
-        "Speech", 
-        "Detailed guide", 
-        "childcare-and-early-education; special-educational-needs-and-disability-send", 
-        "first topic; last topic; middle topic", 
-        "births-deaths-marriages/child-adoption; education/school-life", 
-        "Early years and childcare inspections: resources for inspectors and other organisations; Ofsted inspections of registered childcare providers; Ofsted's compliance, investigation and enforcement handbooks", 
-        "", 
-        "", 
-        "2; 3", 
+        "Dummy Item no. 1",
+        "https://www.gov.uk/dummy/1",
         nil,
-        "this is the recommendation that we have come up with", 
-        "/early-years/childcare", 
+        "2015-01-01",
+        "2015-12-25 08:36",
+        "DfE; HMRC; MOJ",
+        "Speech",
+        "Detailed guide",
+        "childcare-and-early-education; special-educational-needs-and-disability-send",
+        "first topic; last topic; middle topic",
+        "births-deaths-marriages/child-adoption; education/school-life",
+        "Early years and childcare inspections: resources for inspectors and other organisations; Ofsted inspections of registered childcare providers; Ofsted's compliance, investigation and enforcement handbooks",
+        "",
+        "",
+        "2; 3",
+        nil,
+        "this is the recommendation that we have come up with",
+        "/early-years/childcare",
+        "These are notes for this item"
+      ],
+      [
+        "Dummy Item no. 2", "https://www.gov.uk/dummy/2",
+        nil,
+        "2015-01-01",
+        "2015-12-25 08:36",
+        "DfE; HMRC; MOJ",
+        "Speech",
+        "Detailed guide",
+        "childcare-and-early-education; special-educational-needs-and-disability-send",
+        "first topic; last topic; middle topic",
+        "births-deaths-marriages/child-adoption; education/school-life",
+        "Early years and childcare inspections: resources for inspectors and other organisations; Ofsted inspections of registered childcare providers; Ofsted's compliance, investigation and enforcement handbooks",
+        "",
+        "",
+        "2; 3",
+        nil,
+        "this is the recommendation that we have come up with",
+        "/early-years/childcare",
         "These are notes for this item"
       ]
     ]
   end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

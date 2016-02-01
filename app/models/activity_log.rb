@@ -1,17 +1,4 @@
-# == Schema Information
-#
-# Table name: activity_logs
-#
-#  id           :integer          not null, primary key
-#  inventory_id :integer
-#  level        :string(255)
-#  message      :text
-#  created_at   :datetime
-#  updated_at   :datetime
-#
-
 class ActivityLog
-
   def self.info(message, inventory_id = nil)
     log(:info, message, inventory_id)
   end

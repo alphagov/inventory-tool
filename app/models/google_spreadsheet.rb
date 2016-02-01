@@ -1,29 +1,8 @@
-
-# This class uses the GoogleDrive API to manipulate spreadsheets.
-
-# NOTE: Be sure to use the same handle for a worksheet until you save it.
-#
-# e.g. 
-#   overview_worksheet[1,2] = 'this'
-#   overview_worksheet[2,2] = 'that'
-#   overview_worksheet.save
-#
-# will not work as expected, because each call gets a handle to the worksheet as it is on the google drive, not 
-# how it is in your program's memory after you have manipulated it.  
-#
-# Instead, use this pattern:
-#   ws = overview_worksheet
-#   ws[1,2] = 'this'
-#   ws[2,2] = 'that'
-#   ws.save
-#
 class GoogleSpreadsheet
-
   SKELETON_KEY = '1PpwUgdqidkKRU6BuxeKxqpvyoCJ9khxcJLPg5W9FKVI'
   GOOGLE_DRIVE_CONFIG_FILE = "#{Rails.root}/config/google_drive_config.json"
 
   private_class_method :new
-
 
   def self.find_by_key(key)
     new(key: key)
@@ -68,7 +47,6 @@ class GoogleSpreadsheet
   end
 
   def query_rows
-    # return an array of query row objects
     ws = queries_worksheet
     ws.rows(1).map{ |row| QueryRow.new(row) }
   end
@@ -142,7 +120,6 @@ private
   def queries_worksheet
     @spreadsheet.worksheet_by_title('Queries')
   end
-
 
   def duplicate_skeleton(new_title)
     skeleton = @session.spreadsheet_by_key(SKELETON_KEY)

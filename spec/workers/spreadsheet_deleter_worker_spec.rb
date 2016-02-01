@@ -5,7 +5,6 @@ describe SpreadsheetDeleterWorker do
   let(:gs) {double(GoogleSpreadsheet, destroy: nil) }
 
   context 'spreadsheet exists' do
-
     it 'deletes the spreadsheet and the database record' do
       expect(GoogleSpreadsheet).to receive(:find_by_key).with('my-spreadsheet-key').and_return(gs)
       expect(gs).to receive(:delete!)

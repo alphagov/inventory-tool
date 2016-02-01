@@ -4,32 +4,27 @@ require 'support/inventory_item_spec_helper'
 describe InventoryItem do
   include InventoryItemSpecHelper
 
-# :title, :url, :description, :first_published_date, :last_updated, 
-# :organisations, :format, :display_type, :policies, :topics, :mainstream_browse_pages, :document_collections,
-# :is_withdrawn, :in_history_mode, :matching_queries, :recommendation, :redirect_combine_url, :notes 
-
-
   describe '.new_from_spreadsheet_row' do
     it 'assigns the fields from the row to the items attributes' do
       row = [
-        "Benefits overview", 
+        "Benefits overview",
         "http://www.gov.uk/tax/benfits",
         "This is a long-winded description",
-        "30/12/2015 16:17:45", 
+        "30/12/2015 16:17:45",
         "12/01/2016 23:33:22",
         "HMRC; DHSS",
         "detailed_guide_format",
         "Detailed guide",
         "My Policy; His Policy",
-        "tax topic; this topic; that topic", 
-        "Benefits mainstream browse page; Aardvark mainstream browse page", 
-        "Housing; Taxations; Other Stuff", 
-        "NO", 
-        "NO", 
-        "2; 4", 
+        "tax topic; this topic; that topic",
+        "Benefits mainstream browse page; Aardvark mainstream browse page",
+        "Housing; Taxations; Other Stuff",
+        "NO",
+        "NO",
+        "2; 4",
         "relevance",
-        "recs", 
-        "combines", 
+        "recs",
+        "combines",
         "Notes notes and more notes"
       ]
       item = InventoryItem.new_from_spreadsheet_row(999, row)
@@ -43,7 +38,7 @@ describe InventoryItem do
       expect(item.display_type).to eq "Detailed guide"
       expect(item.policies).to eq ['My Policy', 'His Policy']
       expect(item.topics).to eq ['tax topic', 'this topic', 'that topic']
-      expect(item.mainstream_browse_pages).to eq ['Benefits mainstream browse page', 'Aardvark mainstream browse page'] 
+      expect(item.mainstream_browse_pages).to eq ['Benefits mainstream browse page', 'Aardvark mainstream browse page']
       expect(item.document_collections).to eq ['Housing', 'Taxations', 'Other Stuff']
       expect(item.is_withdrawn).to be false
       expect(item.in_history_mode).to be false
@@ -54,18 +49,16 @@ describe InventoryItem do
     end
   end
 
-
   describe '.new_from_search_result' do
     context 'population of fields which are missing from the search result' do
-    
       let(:fields_blank_when_missing) { [ :relevance, :redirect_combine_url, :notes, :recommendation ] }
       let(:fields_that_must_be_present) { [:url, :matching_queries] }
       let(:fields_that_should_be_an_emtpy_array_when_missing) { InventoryItem::ARRAY_FIELDS - [:matching_queries] }
       let(:fields_that_must_be_false_when_missing) { [:is_withdrawn, :in_history_mode] }
       let(:fields_that_must_be_nil_when_missing) { [ :last_updated, :description ] }
       let(:fields_that_must_be_none_when_missing) { [ :display_type] }
-      let(:fields_unknown_when_missing) { InventoryItem::FIELD_POSITIONS - 
-        fields_blank_when_missing - 
+      let(:fields_unknown_when_missing) { InventoryItem::FIELD_POSITIONS -
+        fields_blank_when_missing -
         fields_that_must_be_present -
         fields_that_must_be_false_when_missing -
         fields_that_must_be_none_when_missing -
@@ -110,8 +103,8 @@ describe InventoryItem do
     context 'population of fields which are present in the result set' do
       require_relative '../data/search_api_client_results'
       let(:search_result) { dummy_search_api_results
-        { 'link' => '/early-education', 
-          'title' => 'Early years education', 
+        { 'link' => '/early-education',
+          'title' => 'Early years education',
           'description' => "A guide to eduction for the under 8s",
           'format' => 'detailed_guidance_format',
           'specialist_sectors' => [
@@ -166,7 +159,7 @@ describe InventoryItem do
           '_id' => '/guidance/early-years-qualifications-finder',
           'document_type' => 'edition'
         }
-      } 
+      }
       let(:item)   { InventoryItem.new_from_search_result(search_result, 2)}
 
       it 'populates the url from the links field' do
@@ -209,7 +202,7 @@ describe InventoryItem do
 
   describe '.new' do
     it 'raises an error when called' do
-      expect{ 
+      expect{
         InventoryItem.new
       }.to raise_error NoMethodError, "private method `new' called for InventoryItem:Class"
     end
@@ -318,20 +311,20 @@ describe InventoryItem do
       expect(item.display_type).to eq 'Guidance'
       expect(item.is_withdrawn).to be true
       expect(item.in_history_mode).to be true
-      expect(item.first_published_date).to eq Date.new(2014, 1, 1) 
+      expect(item.first_published_date).to eq Date.new(2014, 1, 1)
     end
 
     it 'merges the mergeable fields' do
-      expect(item.topics).to eq(['added topic no 1', 'another added topic', 'first topic', 'last topic', 'middle topic']) 
-      expect(item.mainstream_browse_pages).to eq(%w{births-deaths-marriages/child-adoption education/school-life my_new_browse_page }) 
-      expect(item.organisations).to eq( %w{ DfE HMRC MOJ }) 
-      expect(item.policies).to eq(%w{ childcare-and-early-education  special-educational-needs-and-disability-send }) 
-      expect(item.document_collections).to eq([ 
+      expect(item.topics).to eq(['added topic no 1', 'another added topic', 'first topic', 'last topic', 'middle topic'])
+      expect(item.mainstream_browse_pages).to eq(%w{births-deaths-marriages/child-adoption education/school-life my_new_browse_page })
+      expect(item.organisations).to eq( %w{ DfE HMRC MOJ })
+      expect(item.policies).to eq(%w{ childcare-and-early-education  special-educational-needs-and-disability-send })
+      expect(item.document_collections).to eq([
         "Early years and childcare inspections: resources for inspectors and other organisations",
         "Ofsted inspections of registered childcare providers",
         "Ofsted's compliance, investigation and enforcement handbooks",
       ])
-      expect(item.matching_queries).to eq( [2, 3, 4, 5]) 
+      expect(item.matching_queries).to eq( [2, 3, 4, 5])
     end
 
     it 'removes the not returned message if there' do
@@ -343,6 +336,5 @@ describe InventoryItem do
     it 'leaves notes unchanged if they dont contain a not returned phrase' do
       expect(item.notes).to eq "These are notes for this item"
     end
-
   end
 end

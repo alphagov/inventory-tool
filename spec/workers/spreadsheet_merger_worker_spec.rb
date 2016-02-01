@@ -1,13 +1,10 @@
 require 'rails_helper'
 
 describe SpreadsheetMergerWorker do
-  
   let(:now) { Time.new(2016, 1, 11, 12, 26, 35, 0) }
   let(:in_the_past) { 5.days.ago }
   let(:inventory) { create :inventory, key: 'my-spreadsheet-key', name: 'My Spreadsheet', date_generated: in_the_past }
   let(:gs) {double(GoogleSpreadsheet, destroy: nil) }
-
-
 
   describe '#perform' do
     context 'valid search queries' do
@@ -17,7 +14,7 @@ describe SpreadsheetMergerWorker do
           expect(ActivityLog).to receive(:info).with("SpreadsheetMergerWorker: Starting for spreadsheet '#{inventory.name}'", inventory.id)
           expect(ActivityLog).to receive(:info).with("SpreadsheetMergerWorker: Spreadsheet Updater created for Inventory #{inventory.id}", inventory.id)
           expect(ActivityLog).to receive(:info).with("SpreadsheetMergerWorker: Spreadsheet Updated for Inventory #{inventory.id}", inventory.id)
-          
+
           worker = SpreadsheetMergerWorker.new
           worker.perform(inventory.id)
 
@@ -58,7 +55,7 @@ describe SpreadsheetMergerWorker do
         expect(ActivityLog).to receive(:info).with("SpreadsheetMergerWorker: Starting for spreadsheet '#{inventory.name}'", inventory.id)
         expect(ActivityLog).to receive(:info).with("SpreadsheetMergerWorker: Spreadsheet Updater created for Inventory #{inventory.id}", inventory.id)
         expect(ActivityLog).to receive(:error).with(/SpreadsheetMergerWorker: RuntimeError: Dummy Error/, inventory.id)
-          
+
         worker = SpreadsheetMergerWorker.new
         worker.perform(inventory.id)
       end
@@ -68,7 +65,7 @@ describe SpreadsheetMergerWorker do
       it 'logs and does nothing else' do
         non_existent_id = (Inventory.maximum(:id) || 1)+ 100
         count = Inventory.count
-        expect(ActivityLog).to receive(:error).with("SpreadsheetMergerWorker: Unable to find Inventory #{non_existent_id}", non_existent_id)  
+        expect(ActivityLog).to receive(:error).with("SpreadsheetMergerWorker: Unable to find Inventory #{non_existent_id}", non_existent_id)
 
         worker = SpreadsheetMergerWorker.new
         worker.perform(non_existent_id)
@@ -78,5 +75,4 @@ describe SpreadsheetMergerWorker do
       end
     end
   end
-  
 end

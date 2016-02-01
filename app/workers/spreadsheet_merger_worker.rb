@@ -1,5 +1,4 @@
 class SpreadsheetMergerWorker < BaseWorker
-
   def perform(inventory_id)
     inventory = Inventory.where(id: inventory_id).first
     if inventory.nil?
@@ -9,7 +8,7 @@ class SpreadsheetMergerWorker < BaseWorker
         log :info, inventory_id, "Starting for spreadsheet '#{inventory.name}'"
         updater = SpreadsheetUpdater.new(inventory)
         log :info, inventory.id, "Spreadsheet Updater created for Inventory #{inventory_id}"
-        updater.update!  
+        updater.update!
         log :info, inventory.id, "Spreadsheet Updated for Inventory #{inventory_id}"
         inventory.mark_generated
       rescue Rummager::SearchApiClientError => err
@@ -20,6 +19,4 @@ class SpreadsheetMergerWorker < BaseWorker
       end
     end
   end
-
 end
-

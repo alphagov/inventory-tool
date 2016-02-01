@@ -1,5 +1,4 @@
 class SpreadsheetCreatorWorker < BaseWorker
-
   def perform(inventory_id, name)
     begin
       log :info, inventory_id, "starting for spreadsheet '#{name}'"
