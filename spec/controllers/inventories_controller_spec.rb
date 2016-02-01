@@ -36,15 +36,12 @@ RSpec.describe InventoriesController, type: :controller do
       expect(response).to render_template("index")
     end
 
-    it "writes a record to the Activity log if there is an exception" do
+    it "writes to the Activity log if there is an exception" do
       expect(Inventory).to receive(:all_ordered).and_raise(RuntimeError, 'Dummy Exception')
+      expect(ActivityLog).to receive(:error).with(anything)
 
       http_login
       get :index
-
-      log = ActivityLog.last
-      expect(log.level).to eq 'ERROR'
-      expect(log.message).to match /RuntimeError: Dummy Exception/
     end
   end
 

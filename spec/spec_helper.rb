@@ -104,4 +104,12 @@ RSpec.configure do |config|
   # see `app/controllers/inventories_controller.rb`
   ENV["USERNAME"] = 'test'
   ENV["PASSWORD"] = 'test'
+
+  # Avoid polluting test output with ActivityLog output
+  require_relative './../app/models/activity_log'
+  class ActivityLog
+    def self.output_to(level)
+      File.open('log/test.log','w')
+    end
+  end
 end

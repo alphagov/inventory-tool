@@ -21,8 +21,6 @@ class Inventory < ActiveRecord::Base
   validate :only_one_skeleton
   
 
-  has_many :activity_logs
-
   def self.skeleton
     self.where(is_skeleton: true).first
   end
@@ -45,7 +43,7 @@ class Inventory < ActiveRecord::Base
   end
 
   def log(level, message)
-    ActivityLog.create!(inventory_id: self.id, level: level, message: message)
+    ActivityLog.send(level, message, self.id)
   end
 
   def mark_creation_complete(key)

@@ -44,43 +44,6 @@ RSpec.describe Inventory, type: :model do
     end
   end
 
-  context 'logging' do
-    context 'inventory record not yet saved' do
-      it 'creates an ActivityLog record with a null inventory_id' do
-        inventory = build :inventory
-        inventory.log :info, "my message"
-
-        logs = ActivityLog.all
-        expect(logs.size).to eq 1
-        expect(logs.first.inventory_id).to be_nil
-        expect(logs.first.level).to eq "INFO"
-        expect(logs.first.message).to eq "my message"
-      end
-    end
-
-    context 'invalid level specified' do
-      it 'raises and error' do
-        inventory = create :inventory
-        expect {
-          inventory.log :xxxx, "my message"
-        }.to raise_error ActiveRecord::RecordInvalid, 'Validation failed: Level XXXX in not a valid level for ActivityLog.'
-      end
-    end
-
-    context 'valid' do
-      it 'creates a valid ActivityLog record' do
-        inventory = create :inventory
-        inventory.log :error, 'my message'
-
-        logs = ActivityLog.where(inventory_id: inventory.id)
-        expect(logs.size).to eq 1
-        expect(logs.first.level).to eq 'ERROR'
-        expect(logs.first.inventory_id).to eq inventory.id
-        expect(logs.first.message).to eq 'my message'
-      end
-    end
-  end
-
   describe '.exist?' do
     it 'returns false if there is no record with the same name' do
       expect(Inventory.exist?('abc')).to be false

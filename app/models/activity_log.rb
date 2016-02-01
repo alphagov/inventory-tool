@@ -10,27 +10,7 @@
 #  updated_at   :datetime
 #
 
-class ActivityLog < ActiveRecord::Base
-
-  belongs_to :inventory
-
-  validates :level, inclusion: { in: %w(DEBUG INFO WARN ERROR), message: "%{value} in not a valid level for ActivityLog." }
-
-  before_validation do
-    self.level = self.level.to_s.upcase
-  end
-
-  def inventory_name
-    self.inventory.nil? ? "" : self.inventory.name
-  end
-
-  def self.for_inventory(inventory_id)
-    self.where('inventory_id = ?', inventory_id).order('id DESC')
-  end
-
-  def time
-    self.created_at.strftime('%Y-%m-%d %H:%M:%S')
-  end
+class ActivityLog
 
   def self.info(message, inventory_id = nil)
     log(:info, message, inventory_id)
@@ -49,6 +29,17 @@ class ActivityLog < ActiveRecord::Base
   end
 
   def self.log(level, message, inventory_id)
-    self.create(inventory_id: inventory_id, level: level, message: message)
+    output = output_to(level)
+    log_message = {
+      level: level,
+      message: message,
+      inventory_id: inventory_id,
+      time: Time.now,
+    }.to_json
+    output.puts log_message
+  end
+
+  def self.output_to(level = :error)
+    level == :error ? STDERR : STDOUT
   end
 end

@@ -20,7 +20,6 @@
         <% unless inventory.is_skeleton? %>
           <%= link_to('Delete', inventory_path(inventory), class: 'btn btn-danger', method: :delete, data: {confirm: "Are you sure?"}) %>
           <%= link_to('Regenerate Queries', "inventories/#{inventory.id}", method: :patch, class: 'btn btn-success') %>
-          <%= link_to('Logs', activity_log_path(inventory.id), method: :get, class: 'btn btn-default') %>
         <% end %>
       </td>
       <td><font color="red"><%= inventory.flash_notes %></font></td>

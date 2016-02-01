@@ -34,33 +34,12 @@ module Rummager
         end
       end
 
-      context 'invalid search params' do
-        it 'raises a SearchApiClientError' do
-          expect(RestClient).to receive(:get).with(url_with_count(query_string, 1000)).and_raise(RestClient::UnprocessableEntity, "XXX")
-          expect{
-            SearchApiClient.new(999, query).search
-          }.to raise_error SearchApiClientError, "Invalid query: #{url_with_count(query_string, 1000)}"
-          logs = ActivityLog.all
-          expect(logs.size).to eq 2
-          expect(logs.first.level).to eq 'DEBUG'
-          expect(logs.first.message).to match /Rummager::SearchApiClient: Executing search: url: http/
-          expect(logs.last.level).to eq 'ERROR'
-          expect(logs.last.message).to eq "Unprocessable Entity returned for query: #{url_with_count(query_string, 1000)}"
-        end
-      end
-
       context 'other exception during search' do
-        it 'raises a SearchApiClientError and logs the error' do
+        it 'raises a SearchApiClientError' do
           expect(RestClient).to receive(:get).and_raise(RuntimeError, "Dummy Error")
           expect{
             SearchApiClient.new(999, query).search
           }.to raise_error SearchApiClientError, "RuntimeError: Dummy Error, URL: #{url_with_count(query_string, 1000)}"
-          logs = ActivityLog.where(inventory_id: 999)
-          expect(logs.size).to eq 2
-          expect(logs.first.level).to eq 'DEBUG'
-          expect(logs.first.message).to eq "Rummager::SearchApiClient: Executing search: url: #{url_with_count(query_string, 1000)}"
-          expect(logs.last.level).to eq 'ERROR'
-          expect(logs.last.message).to match /^RuntimeError: Dummy Error, URL:/
         end
       end
     end

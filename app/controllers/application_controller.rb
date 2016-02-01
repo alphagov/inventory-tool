@@ -7,8 +7,8 @@ class ApplicationController < ActionController::Base
 
   def log_error(exception)
     message = "#{exception.class}: #{exception.message}\n#{exception.backtrace.join("\n")}"
-    ActivityLog.create(level: :error, message: message)
+    ActivityLog.error(message)
     flash[:danger] = "An excpetion has been trapped - view ActivityLogs for details"
-    redirect_to errors_path
+    redirect_to '/'
   end
 end
