@@ -6,7 +6,6 @@ describe SpreadsheetMergerWorker do
   let(:in_the_past) { 5.days.ago }
   let(:inventory) { create :inventory, key: 'my-spreadsheet-key', name: 'My Spreadsheet', date_generated: in_the_past }
   let(:gs) {double(GoogleSpreadsheet, destroy: nil) }
-  let(:logger) { Sidekiq.logger }
 
 
 

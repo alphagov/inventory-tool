@@ -127,23 +127,6 @@ describe InventoryItemCollection do
     end
   end
 
-  describe '#add_unique_item' do
-    it 'should log a warning and overwrite item in collection if spreadsheet has two rows with the same url' do
-      iic = InventoryItemCollection.send(:new, :sheet)
-      item_1 = build_inventory_item(title: 'Title no. 1', url: 'https://my_url')
-      item_2 = build_inventory_item(title: 'Title no. 2', url: 'https://my_url')
-      iic.add_unique_item(item_1, 999)
-      iic.add_unique_item(item_2, 999)
-
-      expect(iic.size).to eq 1
-      expect(iic.collection.values.first.title).to eq 'Title no. 2'
-      logs = ActivityLog.where(inventory_id: 999)
-      expect(logs.size).to eq 1
-      expect(logs.first.level).to eq 'WARN'
-      expect(logs.first.message).to eq "Merging duplicate url: https://my_url"
-    end
-  end
-
   describe '#merge_collections!' do
     it 'should raise if called on an InventoryItemCollection which was created by query' do
       iic = InventoryItemCollection.send(:new, :query)
