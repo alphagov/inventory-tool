@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
 
 gem 'rails', '4.1.14.1'
 gem 'pg'
@@ -26,6 +25,7 @@ group :test, :development do
   gem 'timecop', '~> 0.5'
   gem 'capybara'
   gem 'byebug'
+  gem 'pry-byebug'
 end
 
 group :test do
@@ -39,4 +39,3 @@ end
 group :production do
   gem 'rails_12factor', '~> 0.0'
 end
-
