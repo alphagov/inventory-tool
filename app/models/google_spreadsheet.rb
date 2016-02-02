@@ -1,6 +1,7 @@
 class GoogleSpreadsheet
+  # Identifier of the skeleton spreadsheet.  This contains the column names and
+  # formatting, etc.
   SKELETON_KEY = '1PpwUgdqidkKRU6BuxeKxqpvyoCJ9khxcJLPg5W9FKVI'
-  GOOGLE_DRIVE_CONFIG_FILE = "#{Rails.root}/config/google_drive_config.json"
 
   private_class_method :new
 

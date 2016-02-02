@@ -1,9 +1,0 @@
-{
-  "client_id": null,
-  "client_secret": null,
-  "scope": [
-    "https://www.googleapis.com/auth/drive",
-    "https://spreadsheets.google.com/feeds/"
-  ],
-  "refresh_token": "1/NMmpVCcuqR5f1kaHxqKKCOqNJeeqzvzjhIvKW8ep-0I"
-}
