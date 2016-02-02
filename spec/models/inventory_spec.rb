@@ -1,18 +1,3 @@
-# == Schema Information
-#
-# Table name: inventories
-#
-#  id                         :integer          not null, primary key
-#  name                       :string(255)
-#  key                        :string(255)
-#  is_skeleton                :boolean          default(FALSE)
-#  created_at                 :datetime
-#  updated_at                 :datetime
-#  date_generated             :datetime
-#  background_job_in_progress :boolean          default(FALSE)
-#  flash_notes                :string(255)
-#
-
 require 'rails_helper'
 
 RSpec.describe Inventory, type: :model do
@@ -93,7 +78,7 @@ RSpec.describe Inventory, type: :model do
     it 'displays NEVER if nil' do
       inventory = build :inventory, date_generated: nil
       expect(inventory.presented_date_generated).to eq 'Never'
-    end      
+    end
   end
 
   describe '#start_background_job!' do
@@ -150,7 +135,6 @@ RSpec.describe Inventory, type: :model do
   end
 
   describe 'mark_generated' do
-    
     let(:now)  { Time.now }
 
     it 'should update the time and save to the db' do
@@ -175,6 +159,4 @@ RSpec.describe Inventory, type: :model do
       expect(reloaded_inventory.flash_notes).to be_nil
     end
   end
-
-
 end

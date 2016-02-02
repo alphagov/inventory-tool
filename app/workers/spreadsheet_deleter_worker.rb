@@ -1,5 +1,4 @@
 class SpreadsheetDeleterWorker < BaseWorker
-
   def perform(inventory_id)
     begin
       inventory = Inventory.find(inventory_id)
@@ -20,7 +19,6 @@ class SpreadsheetDeleterWorker < BaseWorker
       inventory.destroy
       log :info, inventory_id, "Db record deleted"
     end
-
   end
 end
 

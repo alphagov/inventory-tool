@@ -4,7 +4,7 @@ class InventoryItem
 
   GOVUK_BASE_URL = 'https://www.gov.uk'
 
-  FIELD_POSITIONS = [ :title, :url, :description, :first_published_date, :last_updated, 
+  FIELD_POSITIONS = [ :title, :url, :description, :first_published_date, :last_updated,
     :organisations, :format, :display_type, :policies, :topics, :mainstream_browse_pages, :document_collections,
     :is_withdrawn, :in_history_mode, :matching_queries, :relevance, :recommendation, :redirect_combine_url, :notes ]
 
@@ -23,7 +23,7 @@ class InventoryItem
   ARRAY_SEPARATOR = '; '
 
   # extra fields we ask for from rummager when doing the search query
-  ADDITIONAL_QUERY_FIELDS = [ :link, :title, :description, :public_timestamp, :format, :display_type,  
+  ADDITIONAL_QUERY_FIELDS = [ :link, :title, :description, :public_timestamp, :format, :display_type,
     :specialist_sectors, :mainstream_browse_pages, :organisations, :policies, :document_collections ].join(',')
 
   attr_accessor *FIELD_POSITIONS
@@ -55,10 +55,10 @@ class InventoryItem
   end
 
   def populate_from_search_result(doc, query_name)
-    @url = doc['link'].nil? ? "No link for #{doc.inspect}" : doc['link'] 
+    @url = doc['link'].nil? ? "No link for #{doc.inspect}" : doc['link']
     @title = extract_field(doc, 'title')
     @description = doc['description']
-    @last_updated = doc['public_timestamp'].nil? ? nil : Time.parse(doc['public_timestamp']) 
+    @last_updated = doc['public_timestamp'].nil? ? nil : Time.parse(doc['public_timestamp'])
     @format = extract_field(doc, 'format').humanize
     @display_type = extract_field(doc, 'display_type', 'None')
     @topics = extract_from_array_of_hashes(doc, 'specialist_sectors', 'title', 'slug')
@@ -97,7 +97,7 @@ private
   def remove_not_returned
     @notes.gsub!(/Not returned from search as of .*;\s/, '') if @notes
   end
-  
+
   def update_updatable_fields(other_item)
     UPDATABLE_FIELDS.each do |fieldname|
       send(putter_method(fieldname), other_item.send(fieldname))
@@ -155,7 +155,7 @@ private
   # returns a list of values for <field> in an array of hashes which is keyed by <element>, in the outer hash <doc>
   def extract_from_array_of_hashes(doc, element, field, fallback_field = 'title')
     return [] if doc[element].nil?
-    
+
     result = []
     doc[element].each do |inner_hash|
       key = inner_hash.key?(field) ? field : fallback_field

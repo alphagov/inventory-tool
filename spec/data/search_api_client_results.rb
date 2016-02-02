@@ -1,4 +1,3 @@
-# dummy results from SearchApiClient.search
 def dummy_search_api_results
   [
     {
@@ -37,7 +36,7 @@ def dummy_search_api_results
     {
       "link" => "/guidance/early-years-qualifications-finder",
       "title" => "Early years qualifications finder",
-      "description" => 
+      "description" =>
       "Find out if the qualifications held by you or staff working in an early years setting can be included in the staff to child ratio for the EYFS.",
       "public_timestamp" => "2016-01-04T11:17:25.000+00:00",
       "format" => "detailed_guidance",

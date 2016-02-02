@@ -24,48 +24,50 @@ describe InventoryItemCollection do
     let(:rows) {
       [
         [
-          "Benefits overview", 
+          "Benefits overview",
           "https://www.gov.uk/tax/benfits",
           "This is a long-winded description",
-          "30/12/2015 16:17:45", 
+          "30/12/2015 16:17:45",
           "12/01/2016 23:33:22",
           "HMRC; DHSS",
           "answer",
           "Detailed guide",
           "My Policy; His Policy",
-          "tax topic; this topic; that topic", 
-          "Benefits mainstream browse page; Aardvark mainstream browse page", 
-          "Housing; Taxations; Other Stuff", 
-          "NO", 
-          "NO", 
-          "2; 4", 
-          "recs", 
-          "combines", 
+          "tax topic; this topic; that topic",
+          "Benefits mainstream browse page; Aardvark mainstream browse page",
+          "Housing; Taxations; Other Stuff",
+          "NO",
+          "NO",
+          "2; 4",
+          "recs",
+          "combines",
           "Notes notes and more notes"
         ],
         [
-          "Benefits overview", 
+          "Benefits overview",
           "https://www.gov.uk/tax/childcare",
           "This is a long-winded description",
-          "30/12/2015 16:17:45", 
+          "30/12/2015 16:17:45",
           "12/01/2016 23:33:22",
           "HMRC; DHSS",
           "answer",
           "Detailed guide",
           "My Policy; His Policy",
-          "tax topic; this topic; that topic", 
-          "Benefits mainstream browse page; Aardvark mainstream browse page", 
-          "Housing; Taxations; Other Stuff", 
-          "NO", 
-          "NO", 
-          "2; 4", 
-          "recs", 
-          "combines", 
+          "tax topic; this topic; that topic",
+          "Benefits mainstream browse page; Aardvark mainstream browse page",
+          "Housing; Taxations; Other Stuff",
+          "NO",
+          "NO",
+          "2; 4",
+          "recs",
+          "combines",
           "Notes notes and more notes"
         ],
       ]
     }
+
     let(:iic) { InventoryItemCollection.new_from_spreadsheet(inventory, rows) }
+
     it 'has the same number of InventoryItems as rows' do
       expect(iic.size).to eq rows.size
     end
@@ -91,7 +93,6 @@ describe InventoryItemCollection do
   end
 
   describe '.new_from_search_queries' do
-
     let(:query_row_1) { QueryRow.new(['q="Early years"', 'Early years']) }
     let(:query_row_2) { QueryRow.new(['q="Late years"', 'Late years']) }
 
@@ -141,7 +142,7 @@ describe InventoryItemCollection do
       let(:item_1_dupe) { InventoryItem.send(:new, url: '/abc/def/1') }
       let(:item_2) { InventoryItem.send(:new, url: '/abc/xyz/2') }
       let(:item_3) { InventoryItem.send(:new, url: '/abc/xyz/3') }
-      let(:google_iic) { 
+      let(:google_iic) {
         iic = InventoryItemCollection.send(:new, :sheet)
         iic.collection['/abc/def/1'] = item_1
         iic.collection['/abc/xyz/2'] = item_2
@@ -174,17 +175,6 @@ describe InventoryItemCollection do
         expect(item_2).to receive(:mark_as_missing)
         google_iic.merge_collections!(query_iic)
       end
-
     end
   end
 end
-
-
-
-
-
-
-
-
-
-

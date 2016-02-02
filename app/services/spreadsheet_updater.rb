@@ -1,8 +1,4 @@
-# This class is reponsible for reading the existing spreadsheet, running the queries
-# again, and updating the spreadsheet and writing it back to Google Drive
-#
 class SpreadsheetUpdater
-
   def initialize(inventory)
     @inventory = inventory
     @spreadsheet = GoogleSpreadsheet.find_by_key(@inventory.key)
@@ -20,10 +16,4 @@ class SpreadsheetUpdater
     @spreadsheet.calculate_overview_stats
     @inventory.log :info, "#{self.class} update complete"
   end
-
-
 end
-
-
-
-

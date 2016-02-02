@@ -1,18 +1,3 @@
-# == Schema Information
-#
-# Table name: inventories
-#
-#  id                         :integer          not null, primary key
-#  name                       :string(255)
-#  key                        :string(255)
-#  is_skeleton                :boolean          default(FALSE)
-#  created_at                 :datetime
-#  updated_at                 :datetime
-#  date_generated             :datetime
-#  background_job_in_progress :boolean          default(FALSE)
-#  flash_notes                :string(255)
-#
-
 FactoryGirl.define do
   factory :inventory do
     sequence(:name) { |n| "Inventory no. #{n}" }

@@ -1,5 +1,4 @@
 class InventoryItemCollectionPresenter
-
   def initialize(inventory_item_collection)
     @iic = inventory_item_collection
   end

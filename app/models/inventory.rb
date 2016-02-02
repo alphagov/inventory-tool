@@ -1,32 +1,15 @@
-# == Schema Information
-#
-# Table name: inventories
-#
-#  id                         :integer          not null, primary key
-#  name                       :string(255)
-#  key                        :string(255)
-#  is_skeleton                :boolean          default(FALSE)
-#  created_at                 :datetime
-#  updated_at                 :datetime
-#  date_generated             :datetime
-#  background_job_in_progress :boolean          default(FALSE)
-#  flash_notes                :string(255)
-#
-
 class Inventory < ActiveRecord::Base
-
   validates :name, presence: {message: "You must specify a name" }
   validates :name, uniqueness: {message: "There is already an inventory spreadsheet with the same name"}
   validates :key, presence: {message: "System Error: No key has been specified"}
   validate :only_one_skeleton
-  
 
   def self.skeleton
     self.where(is_skeleton: true).first
   end
 
   def self.all_ordered
-    self.all.order('is_skeleton DESC, name ASC') 
+    self.all.order('is_skeleton DESC, name ASC')
   end
 
   def self.exist?(name)
@@ -35,8 +18,8 @@ class Inventory < ActiveRecord::Base
 
   def self.create_pending(name)
     self.create(
-      name: name, 
-      key: "pending-key-#{Time.now.to_f.round(2)}", 
+      name: name,
+      key: "pending-key-#{Time.now.to_f.round(2)}",
       background_job_in_progress: true,
       flash_notes: "Spreadsheet has been queued for creation. Reload page in a few seconds to view."
     )
@@ -56,7 +39,7 @@ class Inventory < ActiveRecord::Base
       unless pre_existing_skeleton.nil?
         errors.add(:base, "A Skeleton spreadsheet already exists.  You cannot create another")
       end
-    end 
+    end
   end
 
   def spreadsheet_url

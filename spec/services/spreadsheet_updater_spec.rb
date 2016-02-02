@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe SpreadsheetUpdater do
- 
   context 'updating the spreadsheet' do
     it 'should load item collections from the spreadsheet and the queries' do
       inventory = create :inventory, key: 'my-key'
@@ -25,5 +24,4 @@ describe SpreadsheetUpdater do
       su.update!
     end
   end
-
 end

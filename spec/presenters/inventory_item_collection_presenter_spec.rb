@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'support/inventory_item_spec_helper'
 
-describe InventoryItemCollectionPresenter do 
+describe InventoryItemCollectionPresenter do
   include InventoryItemSpecHelper
 
   describe '#present_in_chunks' do
@@ -35,6 +35,5 @@ describe InventoryItemCollectionPresenter do
       expect(row.first).to eq 'Dummy Item no. 9'
       expect(row.size).to eq 19
     end
-
   end
 end

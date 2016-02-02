@@ -13,5 +13,4 @@ class QueryRow
   def empty?
     @query.blank?
   end
-
 end

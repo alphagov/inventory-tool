@@ -1,5 +1,4 @@
 class InventoryItemPresenter
-
   def initialize(inventory_item)
     @item = inventory_item
   end
@@ -73,6 +72,4 @@ private
   def present_bool(fieldname, value)
     value ? InventoryItem::BOOLEAN_FIELDS[fieldname] : ''
   end
-
-
 end

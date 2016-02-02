@@ -2,11 +2,10 @@ require 'rails_helper'
 
 module Rummager
   describe SearchApiClient do
-
     let(:base_url) { 'https://www.gov.uk/api/search.json'}
     let(:query) { "q=%22Early%20years%22" }
     let(:query_string) do
-      base_url + 
+      base_url +
       '?' + query +
       "&fields=link,title,description,public_timestamp," +
       "format,display_type,specialist_sectors,mainstream_browse_pages,organisations,policies,document_collections" +
@@ -56,16 +55,16 @@ module Rummager
 
           results = SearchApiClient.new(999, query).search
           expect(results.map{ |r| r['description']}).to eq(
-            [ 
-              'Description No. 1', 
-              'Description No. 2', 
-              'Description No. 3', 
-              'Description No. 4', 
-              'Description No. 5', 
-              'Description No. 6', 
-              'Description No. 7', 
-              'Description No. 8', 
-              'Description No. 9', 
+            [
+              'Description No. 1',
+              'Description No. 2',
+              'Description No. 3',
+              'Description No. 4',
+              'Description No. 5',
+              'Description No. 6',
+              'Description No. 7',
+              'Description No. 8',
+              'Description No. 9',
               'Description No. 10',
             ])
         end
@@ -81,14 +80,14 @@ module Rummager
 
           results = SearchApiClient.new(999, query).search
           expect(results.map{ |r| r['description']}).to eq(
-            [ 
-              'Description No. 1', 
-              'Description No. 2', 
-              'Description No. 3', 
-              'Description No. 4', 
-              'Description No. 5', 
-              'Description No. 6', 
-              'Description No. 7', 
+            [
+              'Description No. 1',
+              'Description No. 2',
+              'Description No. 3',
+              'Description No. 4',
+              'Description No. 5',
+              'Description No. 6',
+              'Description No. 7',
             ])
         end
       end
@@ -103,16 +102,16 @@ module Rummager
 
           results = SearchApiClient.new(999, query).search
           expect(results.map{ |r| r['description']}).to eq(
-            [ 
-              'Description No. 1', 
-              'Description No. 2', 
-              'Description No. 3', 
-              'Description No. 4', 
-              'Description No. 5', 
-              'Description No. 6', 
-              'Description No. 7', 
-              'Description No. 8', 
-              'Description No. 9', 
+            [
+              'Description No. 1',
+              'Description No. 2',
+              'Description No. 3',
+              'Description No. 4',
+              'Description No. 5',
+              'Description No. 6',
+              'Description No. 7',
+              'Description No. 8',
+              'Description No. 9',
               'Description No. 10',
             ])
         end
@@ -126,17 +125,16 @@ module Rummager
 
           results = SearchApiClient.new(999, query).search
           expect(results.map{ |r| r['description']}).to eq(
-            [ 
-              'Description No. 1', 
-              'Description No. 2', 
-              'Description No. 3', 
-              'Description No. 4', 
-              'Description No. 5', 
+            [
+              'Description No. 1',
+              'Description No. 2',
+              'Description No. 3',
+              'Description No. 4',
+              'Description No. 5',
             ])
         end
       end
     end
-
 
     def url_with_start(url, start)
       url.sub(/&start=\d+/, "&start=#{start}")
@@ -160,12 +158,11 @@ module Rummager
       response.to_json
     end
 
-
     def docs_response_json
       %q|
       {
         "results":[
-          { 
+          {
             "description":"List of information about Early years.",
             "format":"specialist_sector",
             "link":"/topic/schools-colleges-childrens-services/early-years",
@@ -233,9 +230,3 @@ module Rummager
     end
   end
 end
-
-
-
-
-
-

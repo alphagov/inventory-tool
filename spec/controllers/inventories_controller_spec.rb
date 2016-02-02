@@ -36,7 +36,7 @@ RSpec.describe InventoriesController, type: :controller do
       expect(response).to render_template("index")
     end
 
-    it "writes to the Activity log if there is an exception" do
+    it 'writes to the Activity log if there is an exception' do
       expect(Inventory).to receive(:all_ordered).and_raise(RuntimeError, 'Dummy Exception')
       expect(ActivityLog).to receive(:error).with(anything)
 
@@ -45,11 +45,9 @@ RSpec.describe InventoriesController, type: :controller do
     end
   end
 
-
   describe 'POST create' do
-
     let(:spreadsheet) { double(GoogleSpreadsheet, key: 'my-spreadsheet-key') }
-    
+
     it 'creates a pending record and queues a SpreadsheetCreatorWorker' do
       inventory = double(Inventory, id: 33, log: nil)
       allow(Inventory).to receive(:create_pending).and_return(inventory)
@@ -76,7 +74,7 @@ RSpec.describe InventoriesController, type: :controller do
       expect(response).to redirect_to(inventories_path)
       expect(inventory).to have_received(:log).with(:info, "Inventory record created for spreadsheet 'xyz'")
     end
-    
+
     it 'errrors if name already exists' do
       create :inventory, name: 'abc'
 
@@ -95,8 +93,6 @@ RSpec.describe InventoriesController, type: :controller do
 
     before(:each) do
       allow(SpreadsheetMergerWorker).to receive(:perform_async)
-      # allow(SpreadsheetUpdater).to receive(:new).with(inventory.key).and_return(updater)
-      # allow(updater).to receive(:update!)
     end
 
     it 'queues a background job' do
@@ -123,10 +119,7 @@ RSpec.describe InventoriesController, type: :controller do
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(inventories_path)
     end
-
-
   end
-
 
   describe 'DELETE destroy' do
     let(:inventory) { create :inventory, name: 'Deletable Spreadsheet' }
@@ -138,7 +131,7 @@ RSpec.describe InventoriesController, type: :controller do
     it 'starts a background job' do
       http_login
       delete :destroy, id: inventory.id
-      
+
       inv = Inventory.find(inventory.id)
       expect(inv.background_job_in_progress).to be true
       expect(inv.flash_notes).to eq "Queued for deletion."
@@ -158,17 +151,4 @@ RSpec.describe InventoriesController, type: :controller do
       expect(flash[:danger]).to eq "Spreadsheet 'Deletable Spreadsheet' has been queued for deletion."
     end
   end
-    
-    
 end
-
-
-
-
-
-
-
-
-
-
-

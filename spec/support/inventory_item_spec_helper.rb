@@ -1,5 +1,4 @@
 module InventoryItemSpecHelper
-
   def build_inventory_item(options = {})
     default_options = {
       url: '/my_url',
@@ -11,7 +10,7 @@ module InventoryItemSpecHelper
       mainstream_browse_pages: %w{births-deaths-marriages/child-adoption education/school-life },
       organisations: %w{ HMRC DfE MOJ },
       policies: %w{ special-educational-needs-and-disability-send childcare-and-early-education },
-      document_collections: [ 
+      document_collections: [
         "Early years and childcare inspections: resources for inspectors and other organisations",
         "Ofsted's compliance, investigation and enforcement handbooks",
         "Ofsted inspections of registered childcare providers",
@@ -28,7 +27,6 @@ module InventoryItemSpecHelper
     InventoryItem.send(:new, params)
   end
 
-
   def build_blank_inventory_item(options = {})
     InventoryItem.send(:new, options)
   end
@@ -41,6 +39,4 @@ module InventoryItemSpecHelper
     end
     iic
   end
-
-
 end

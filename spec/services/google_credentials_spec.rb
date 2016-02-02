@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe GoogleCredentials do
-
   describe '.authenticate_new_credentials' do
     it 'should create a new saved_session' do
       expect(GoogleDrive).to receive(:saved_session).with(GoogleSpreadsheet::GOOGLE_DRIVE_CONFIG_FILE)
