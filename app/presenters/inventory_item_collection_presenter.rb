@@ -15,10 +15,8 @@ class InventoryItemCollectionPresenter
 
 private
   def present_items(items)
-    rows = []
-    items.each do |item|
-      rows << InventoryItemPresenter.new(item).present
-      end
-    rows
+    items.map do |item|
+      InventoryItemPresenter.new(item).present
+    end
   end
 end

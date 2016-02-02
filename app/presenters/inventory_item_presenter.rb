@@ -4,11 +4,9 @@ class InventoryItemPresenter
   end
 
   def present
-    row = []
-    InventoryItem::FIELD_POSITIONS.each do |field|
-      row << present_field(field)
+    InventoryItem::FIELD_POSITIONS.map do |field|
+      present_field(field)
     end
-    row
   end
 
 private
