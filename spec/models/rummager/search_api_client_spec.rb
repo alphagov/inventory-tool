@@ -8,7 +8,7 @@ module Rummager
       base_url +
       '?' + query +
       "&fields=link,title,description,public_timestamp," +
-      "format,display_type,specialist_sectors,mainstream_browse_pages,organisations,policies,document_collections" +
+      "format,display_type,specialist_sectors,mainstream_browse_pages,organisations,policies,document_collections,is_historic" +
       "&start=0" +
       "&count=0"
     end

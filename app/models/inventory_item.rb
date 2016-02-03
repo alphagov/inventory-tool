@@ -6,25 +6,24 @@ class InventoryItem
 
   FIELD_POSITIONS = [ :title, :url, :description, :first_published_date, :last_updated,
     :organisations, :format, :display_type, :topics, :mainstream_browse_pages, :policies, :document_collections,
-    :is_withdrawn, :in_history_mode, :matching_queries, :relevance, :recommendation, :redirect_combine_url, :notes ]
+    :is_withdrawn, :is_historic, :matching_queries, :relevance, :recommendation, :redirect_combine_url, :notes ]
 
   # fields on this model that can be updated from an InventoryItem created from a more recent search
   UPDATABLE_FIELDS = [ :title, :last_updated, :format, :display_type, :description,
-    :is_withdrawn, :in_history_mode, :first_published_date]
+    :is_withdrawn, :is_historic, :first_published_date]
 
   # fields on this model which should be merged with an InventoryItem created from a more recent search
   MERGEABLE_FIELDS = [ :topics, :mainstream_browse_pages, :organisations, :policies, :document_collections, :matching_queries]
 
   # fields that are transformed into an array
   ARRAY_FIELDS = [ :topics, :mainstream_browse_pages, :organisations, :policies, :document_collections, :matching_queries ]
-
-  BOOLEAN_FIELDS = { :is_withdrawn => 'Withdrawn', :in_history_mode => "History mode" }
-
   ARRAY_SEPARATOR = '; '
+
+  BOOLEAN_FIELDS = [:is_historic, :is_withdrawn]
 
   # extra fields we ask for from rummager when doing the search query
   ADDITIONAL_QUERY_FIELDS = [ :link, :title, :description, :public_timestamp, :format, :display_type,
-    :specialist_sectors, :mainstream_browse_pages, :organisations, :policies, :document_collections ].join(',')
+    :specialist_sectors, :mainstream_browse_pages, :organisations, :policies, :document_collections, :is_historic ].join(',')
 
   attr_accessor *FIELD_POSITIONS
 
@@ -38,7 +37,7 @@ class InventoryItem
       if is_array_field?(field_name)
         params[field_name] = make_array(data_item)
       elsif is_boolean_field?(field_name)
-        params[field_name] = make_boolean(field_name, data_item)
+        params[field_name] = data_item.downcase == "yes"
       else
         params[field_name] = data_item
       end
@@ -62,12 +61,12 @@ class InventoryItem
     @format = extract_field(doc, 'format').humanize
     @display_type = extract_field(doc, 'display_type', 'None')
     @topics = extract_from_array_of_hashes(doc, 'specialist_sectors', 'title', 'slug')
-    @mainstream_browse_pages = doc['mainstram_browse_page'] || []
+    @mainstream_browse_pages = doc['mainstream_browse_pages'] || []
     @organisations = extract_from_array_of_hashes(doc, 'organisations', 'acronym')
     @policies = doc['policies'].nil? ? [] : doc['policies'].sort
     @document_collections = extract_from_array_of_hashes(doc, 'document_collections', 'title', 'slug')
-    @is_withdrawn = false
-    @in_history_mode = false
+    @is_withdrawn = false # To be defined once this is part of the search index
+    @is_historic = extract_field(doc, 'is_historic')
     @first_published_date = 'Unknown'
     @matching_queries = [query_name]
     @recommendation = ''
@@ -136,12 +135,7 @@ private
   end
 
   def self.is_boolean_field?(fieldname)
-    BOOLEAN_FIELDS.keys.include?(fieldname)
-  end
-
-  def self.make_boolean(fieldname, data_field)
-    true_value = BOOLEAN_FIELDS[fieldname]
-    data_field == true_value ? true : false
+    BOOLEAN_FIELDS.include?(fieldname)
   end
 
   def self.is_array_field?(fieldname)

@@ -16,7 +16,7 @@ module InventoryItemSpecHelper
         "Ofsted inspections of registered childcare providers",
       ],
       is_withdrawn: false,
-      in_history_mode: false,
+      is_historic: false,
       first_published_date: Date.new(2015, 1, 1),
       matching_queries: [2, 3],
       recommendation: "this is the recommendation that we have come up with",
