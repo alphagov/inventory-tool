@@ -41,7 +41,7 @@ describe InventoryItem do
       expect(item.mainstream_browse_pages).to eq ['Benefits mainstream browse page', 'Aardvark mainstream browse page']
       expect(item.document_collections).to eq ['Housing', 'Taxations', 'Other Stuff']
       expect(item.is_withdrawn).to be false
-      expect(item.in_history_mode).to be false
+      expect(item.is_historic).to be false
       expect(item.matching_queries).to eq %w{ 2 4 }
       expect(item.recommendation).to eq "recs"
       expect(item.redirect_combine_url).to eq "combines"
@@ -54,7 +54,7 @@ describe InventoryItem do
       let(:fields_blank_when_missing) { [ :relevance, :redirect_combine_url, :notes, :recommendation ] }
       let(:fields_that_must_be_present) { [:url, :matching_queries] }
       let(:fields_that_should_be_an_emtpy_array_when_missing) { InventoryItem::ARRAY_FIELDS - [:matching_queries] }
-      let(:fields_that_must_be_false_when_missing) { [:is_withdrawn, :in_history_mode] }
+      let(:fields_that_must_be_false_when_missing) { [:is_withdrawn, :is_historic] }
       let(:fields_that_must_be_nil_when_missing) { [ :last_updated, :description ] }
       let(:fields_that_must_be_none_when_missing) { [ :display_type] }
       let(:fields_unknown_when_missing) { InventoryItem::FIELD_POSITIONS -
@@ -291,7 +291,7 @@ describe InventoryItem do
         document_collections: [ 'Ofsted inspections of registered childcare providers' ],
         matching_queries: [ 2, 4, 5],
         is_withdrawn: true,
-        in_history_mode: true,
+        is_historic: true,
         first_published_date: Date.new(2014, 1, 1),
         recommendation: nil,
         redirect_combine_url: nil,
@@ -310,7 +310,7 @@ describe InventoryItem do
       expect(item.format).to eq 'Press Release'
       expect(item.display_type).to eq 'Guidance'
       expect(item.is_withdrawn).to be true
-      expect(item.in_history_mode).to be true
+      expect(item.is_historic).to be true
       expect(item.first_published_date).to eq Date.new(2014, 1, 1)
     end
 

@@ -52,11 +52,11 @@ private
   end
 
   def present_is_withdrawn
-    present_bool(:is_withdrawn, @item.is_withdrawn)
+    present_bool(@item.is_withdrawn)
   end
 
-  def present_in_history_mode
-    present_bool(:in_history_mode, @item.in_history_mode)
+  def present_is_historic
+    present_bool(@item.is_historic)
   end
 
   def present_first_published_date
@@ -67,7 +67,7 @@ private
     array.blank? ? '' : array.sort.join(InventoryItem::ARRAY_SEPARATOR)
   end
 
-  def present_bool(fieldname, value)
-    value ? InventoryItem::BOOLEAN_FIELDS[fieldname] : ''
+  def present_bool(value)
+    value ? 'Yes' : 'No'
   end
 end
