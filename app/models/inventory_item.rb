@@ -5,7 +5,7 @@ class InventoryItem
   GOVUK_BASE_URL = 'https://www.gov.uk'
 
   FIELD_POSITIONS = [ :title, :url, :description, :first_published_date, :last_updated,
-    :organisations, :format, :display_type, :policies, :topics, :mainstream_browse_pages, :document_collections,
+    :organisations, :format, :display_type, :topics, :mainstream_browse_pages, :policies, :document_collections,
     :is_withdrawn, :in_history_mode, :matching_queries, :relevance, :recommendation, :redirect_combine_url, :notes ]
 
   # fields on this model that can be updated from an InventoryItem created from a more recent search
