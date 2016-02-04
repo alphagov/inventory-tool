@@ -33,8 +33,8 @@ describe InventoryItemPresenter do
         expect(row[index_for(:document_collections)]).to eq "Early years and childcare inspections: resources for inspectors and other organisations; " +
           "Ofsted inspections of registered childcare providers; " +
           "Ofsted's compliance, investigation and enforcement handbooks"
-        expect(row[index_for(:is_withdrawn)]).to eq 'No'
-        expect(row[index_for(:is_historic)]).to eq 'No'
+        expect(row[index_for(:is_withdrawn)]).to eq ''
+        expect(row[index_for(:is_historic)]).to eq ''
         expect(row[index_for(:first_published_date)]).to eq '2015-01-01'
         expect(row[index_for(:matching_queries)]).to eq '2; 3'
         expect(row[index_for(:recommendation)]).to eq 'this is the recommendation that we have come up with'
@@ -62,8 +62,8 @@ describe InventoryItemPresenter do
         expect(row[index_for(:organisations)]).to be_blank
         expect(row[index_for(:policies)]).to be_blank
         expect(row[index_for(:document_collections)]).to be_blank
-        expect(row[index_for(:is_withdrawn)]).to eq 'No'
-        expect(row[index_for(:is_historic)]).to eq 'No'
+        expect(row[index_for(:is_withdrawn)]).to eq ''
+        expect(row[index_for(:is_historic)]).to eq ''
         expect(row[index_for(:first_published_date)]).to be_blank
         expect(row[index_for(:matching_queries)]).to be_blank
         expect(row[index_for(:recommendation)]).to be_blank
@@ -76,8 +76,8 @@ describe InventoryItemPresenter do
       let(:item) { build_inventory_item(is_withdrawn: true, is_historic: true) }
 
       it 'should translate true to YES' do
-        expect(row[index_for(:is_withdrawn)]).to eq 'Yes'
-        expect(row[index_for(:is_historic)]).to eq 'Yes'
+        expect(row[index_for(:is_withdrawn)]).to eq 'withdrawn'
+        expect(row[index_for(:is_historic)]).to eq 'historic'
       end
     end
   end

@@ -19,7 +19,7 @@ class InventoryItem
   ARRAY_FIELDS = [ :topics, :mainstream_browse_pages, :organisations, :policies, :document_collections, :matching_queries ]
   ARRAY_SEPARATOR = '; '
 
-  BOOLEAN_FIELDS = [:is_historic, :is_withdrawn]
+  BOOLEAN_FIELDS = { is_historic: "historic", is_withdrawn: "withdrawn" }
 
   # extra fields we ask for from rummager when doing the search query
   ADDITIONAL_QUERY_FIELDS = [ :link, :title, :description, :public_timestamp, :format, :display_type,
@@ -37,7 +37,7 @@ class InventoryItem
       if is_array_field?(field_name)
         params[field_name] = make_array(data_item)
       elsif is_boolean_field?(field_name)
-        params[field_name] = data_item.downcase == "yes"
+        params[field_name] = data_item.downcase == BOOLEAN_FIELDS[field_name]
       else
         params[field_name] = data_item
       end
