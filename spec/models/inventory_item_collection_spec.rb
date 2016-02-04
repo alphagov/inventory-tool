@@ -6,6 +6,53 @@ describe InventoryItemCollection do
 
   let(:inventory) { create :inventory }
 
+  let(:rows) {
+    [
+      [
+        "Benefits overview",
+        "https://www.gov.uk/tax/benfits",
+        "This is a long-winded description",
+        "30/12/2015 16:17:45",
+        "12/01/2016 23:33:22",
+        "HMRC; DHSS",
+        "answer",
+        "Detailed guide",
+        "tax topic; this topic; that topic",
+        "Benefits mainstream browse page; Aardvark mainstream browse page",
+        "My Policy; His Policy",
+        "Housing; Taxations; Other Stuff",
+        "NO",
+        "NO",
+        "bar; foo",
+        "recs",
+        "combines",
+        "Notes notes and more notes"
+      ],
+      [
+        "Benefits overview",
+        "https://www.gov.uk/tax/childcare",
+        "This is a long-winded description",
+        "30/12/2015 16:17:45",
+        "12/01/2016 23:33:22",
+        "HMRC; DHSS",
+        "answer",
+        "Detailed guide",
+        "tax topic; this topic; that topic",
+        "Benefits mainstream browse page; Aardvark mainstream browse page",
+        "My Policy; His Policy",
+        "Housing; Taxations; Other Stuff",
+        "NO",
+        "NO",
+        "bar; foo",
+        "recs",
+        "combines",
+        "Notes notes and more notes"
+      ],
+    ]
+  }
+
+  let(:iic) { InventoryItemCollection.new_from_spreadsheet(inventory, rows) }
+
   describe '.new' do
     it 'raises an error if called from outside the class' do
       expect{
@@ -21,52 +68,6 @@ describe InventoryItemCollection do
   end
 
   describe '.new_from_spreadsheet' do
-    let(:rows) {
-      [
-        [
-          "Benefits overview",
-          "https://www.gov.uk/tax/benfits",
-          "This is a long-winded description",
-          "30/12/2015 16:17:45",
-          "12/01/2016 23:33:22",
-          "HMRC; DHSS",
-          "answer",
-          "Detailed guide",
-          "tax topic; this topic; that topic",
-          "Benefits mainstream browse page; Aardvark mainstream browse page",
-          "My Policy; His Policy",
-          "Housing; Taxations; Other Stuff",
-          "NO",
-          "NO",
-          "2; 4",
-          "recs",
-          "combines",
-          "Notes notes and more notes"
-        ],
-        [
-          "Benefits overview",
-          "https://www.gov.uk/tax/childcare",
-          "This is a long-winded description",
-          "30/12/2015 16:17:45",
-          "12/01/2016 23:33:22",
-          "HMRC; DHSS",
-          "answer",
-          "Detailed guide",
-          "tax topic; this topic; that topic",
-          "Benefits mainstream browse page; Aardvark mainstream browse page",
-          "My Policy; His Policy",
-          "Housing; Taxations; Other Stuff",
-          "NO",
-          "NO",
-          "2; 4",
-          "recs",
-          "combines",
-          "Notes notes and more notes"
-        ],
-      ]
-    }
-
-    let(:iic) { InventoryItemCollection.new_from_spreadsheet(inventory, rows) }
 
     it 'has the same number of InventoryItems as rows' do
       expect(iic.size).to eq rows.size
@@ -174,6 +175,35 @@ describe InventoryItemCollection do
 
         expect(item_2).to receive(:mark_as_missing)
         google_iic.merge_collections!(query_iic)
+      end
+
+      describe 'overwriting mergeable fields for an item that is still present in the inventory' do
+        context "with an empty field in the new collection" do
+          it "clears the value" do
+            query_iic = InventoryItemCollection.send(:new, :query)
+
+            iic.merge_collections!(query_iic)
+
+            iic.items.each do |inventory_item|
+               expect(inventory_item.matching_queries).to eq([])
+            end
+          end
+        end
+        
+        context "with a changed field in the new collection" do
+          let (:changed_item) {InventoryItem.send(:new, {url: "/tax/childcare"})}
+
+          it "replaces the value" do
+            expect(iic.collection[changed_item.url].matching_queries).to eq(['bar', 'foo'])
+
+            changed_item.matching_queries = ['foo', 'baz']
+            query_iic = InventoryItemCollection.send(:new, :query)
+            query_iic.collection[changed_item.url] = changed_item
+            iic.merge_collections!(query_iic)
+
+            expect(iic.collection[changed_item.url].matching_queries).to eq(['baz', 'foo'])
+          end
+        end
       end
     end
   end

@@ -24,6 +24,7 @@ class InventoryItemCollection
 
   def self.new_from_search_queries(inventory, query_rows)
     inventory.log :info, "#{self} instantiating from queries"
+
     iic = new(:query)
     query_rows.each_with_index do |query_row, index|
       next if query_row.empty?
@@ -61,6 +62,11 @@ class InventoryItemCollection
     unless @source == :sheet && query_collection.source == :query
       raise "#merge_collections! must be called on an instance created from a spreadsheet and passed an instance created from a query"
     end
+
+    items.each do |spreadsheet_item|
+      spreadsheet_item.reset_mergeable_fields!
+    end
+
     query_collection.items.each do |query_collection_item|
       update_item(query_collection_item)
       (item_urls - query_collection.item_urls).each do |url|

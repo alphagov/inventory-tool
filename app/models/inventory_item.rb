@@ -92,6 +92,14 @@ class InventoryItem
     end
   end
 
+  def reset_mergeable_fields!
+    # We need to reset these fields when we regenerate the spreadsheet, so that
+    # we are only merging new query results
+    MERGEABLE_FIELDS.each do |fieldname|
+      send(putter_method(fieldname), [])
+    end
+  end
+
 private
   def remove_not_returned
     @notes.gsub!(/Not returned from search as of .*;\s/, '') if @notes
@@ -123,7 +131,9 @@ private
   end
 
   def merge_arrays(other_item, fieldname)
-    (send(fieldname) | other_item.send(fieldname)).sort
+    current_value = send(fieldname) || []
+    other_value = other_item.send(fieldname) || []
+    (current_value | other_value).sort
   end
 
   def extract_field(doc, fieldname, nil_value = 'Unknown')
