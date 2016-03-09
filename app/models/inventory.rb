@@ -55,7 +55,7 @@ class Inventory < ActiveRecord::Base
   end
 
   def start_background_job!(message)
-    log(message)
+    log(:info, message)
     update_attributes(background_job_in_progress: true, flash_notes: message)
   end
 
