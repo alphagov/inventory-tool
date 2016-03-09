@@ -16,11 +16,25 @@ update the spreadsheets.
 * redis
 * postgresql
 
+### Developer set up
+
+#### Setting up OAuth for Google's API
+
+If this step is skipped, the sidekiq jobs will make you follow the OAuth process every time
+you regenerate an inventory.
+
+1. Go to https://console.developers.google.com and create a project
+2. In Google API manager go to Credentials and add OAuth credentials with type "Other"
+3. Set environment variables and run the following rake task:
+    GOOGLE_CLIENT_ID=... GOOGLE_CLIENT_SECRET=... bundle exec rake google:auth
+4. Follow the instructions to get a GOOGLE_REFRESH_TOKEN. Note that this is a non-expiring token that will grant access to anything in your google drive.
+5. In API manager, search for Drive API and enable it.
+
 ### Running the application
 
 ```sh
     redis-server
-    bundle exec sidekiq
+    GOOGLE_CLIENT_ID=... GOOGLE_CLIENT_SECRET=... GOOGLE_REFRESH_TOKEN=... bundle exec sidekiq
     USERNAME=test PASSWORD=test bundle exec rails s
 ```
 
@@ -55,6 +69,6 @@ or if you wanted to deploy branch with name 'my-branch'
 [MIT License](LICENCE)
 
 
-## Google Authentication
+## More information
 
-See the wiki: https://gov-uk.atlassian.net/wiki/pages/createpage.action?spaceKey=FS&fromPageId=44761298
+See the wiki: https://gov-uk.atlassian.net/wiki/pages/viewpage.action?pageId=47677552
