@@ -12,6 +12,8 @@ gem 'rest-client', '~> 1.8'
 gem 'factory_girl_rails', '~> 4.5'
 gem 'sidekiq', '~> 4.0'
 
+gem 'newrelic_rpm'
+
 group :development do
   gem 'annotate'
   gem 'better_errors'
