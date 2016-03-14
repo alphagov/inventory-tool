@@ -9,7 +9,7 @@ class Inventory < ActiveRecord::Base
   end
 
   def self.all_ordered
-    self.all.order('is_skeleton DESC, name ASC')
+    self.order('updated_at DESC')
   end
 
   def self.exist?(name)

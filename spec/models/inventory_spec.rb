@@ -58,17 +58,6 @@ RSpec.describe Inventory, type: :model do
     end
   end
 
-  describe '.all_ordered' do
-    it 'returns the skeleton first followed by all in alphabetical order' do
-      create :inventory, name: 'zzz', key: 'key1'
-      create :skeleton_inventory
-      create :inventory, name: 'aaa', key: 'key2'
-      records = Inventory.all_ordered
-      expect(records.map(&:name)).to eq(['Test skeleton spreadsheet', 'aaa', 'zzz'])
-      expect(records.map(&:is_skeleton)).to eq([true, false, false])
-    end
-  end
-
   describe 'presented_date_generated' do
     it 'displays the formatted date if present' do
       inventory = build :inventory, date_generated: Time.new(2016, 1, 2, 9, 2,36, 0)
