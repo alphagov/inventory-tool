@@ -11,9 +11,6 @@ describe SpreadsheetUpdaterWorker do
       it 'updates the spreadsheet and marks the db record as generated' do
         Timecop.freeze(now) do
           expect(SpreadsheetUpdater).to receive(:new).and_return(double(SpreadsheetUpdater, update!: nil))
-          expect(ActivityLog).to receive(:info).with("SpreadsheetUpdaterWorker: Starting for spreadsheet '#{inventory.name}'", inventory.id)
-          expect(ActivityLog).to receive(:info).with("SpreadsheetUpdaterWorker: Spreadsheet Updater created for Inventory #{inventory.id}", inventory.id)
-          expect(ActivityLog).to receive(:info).with("SpreadsheetUpdaterWorker: Spreadsheet Updated for Inventory #{inventory.id}", inventory.id)
 
           worker = SpreadsheetUpdaterWorker.new
           worker.perform(inventory.id)
@@ -32,9 +29,6 @@ describe SpreadsheetUpdaterWorker do
           updater = double(SpreadsheetUpdater)
           expect(SpreadsheetUpdater).to receive(:new).and_return(updater)
           expect(updater).to receive(:update!).and_raise(Rummager::SearchApiClientError, 'xxxxx')
-          expect(ActivityLog).to receive(:info).with("SpreadsheetUpdaterWorker: Starting for spreadsheet '#{inventory.name}'", inventory.id)
-          expect(ActivityLog).to receive(:info).with("SpreadsheetUpdaterWorker: Spreadsheet Updater created for Inventory #{inventory.id}", inventory.id)
-          expect(ActivityLog).to receive(:warn).with("SpreadsheetUpdaterWorker: SearchApiClientError: xxxxx", inventory.id)
 
           worker = SpreadsheetUpdaterWorker.new
           worker.perform(inventory.id)
