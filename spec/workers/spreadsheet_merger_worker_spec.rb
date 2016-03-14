@@ -60,19 +60,5 @@ describe SpreadsheetUpdaterWorker do
         worker.perform(inventory.id)
       end
     end
-
-    context 'inventory record does not exist' do
-      it 'logs and does nothing else' do
-        non_existent_id = (Inventory.maximum(:id) || 1)+ 100
-        count = Inventory.count
-        expect(ActivityLog).to receive(:error).with("SpreadsheetUpdaterWorker: Unable to find Inventory #{non_existent_id}", non_existent_id)
-
-        worker = SpreadsheetUpdaterWorker.new
-        worker.perform(non_existent_id)
-
-        expect(Inventory.count).to eq count
-        expect(SpreadsheetUpdater).not_to receive(:new)
-      end
-    end
   end
 end
