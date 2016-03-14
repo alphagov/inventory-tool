@@ -84,14 +84,14 @@ RSpec.describe InventoriesController, type: :controller do
     let(:updater) { double SpreadsheetUpdater }
 
     before(:each) do
-      allow(SpreadsheetMergerWorker).to receive(:perform_async)
+      allow(SpreadsheetUpdaterWorker).to receive(:perform_async)
     end
 
     it 'queues a background job' do
       http_login
       patch :update, id: inventory.id
 
-      expect(SpreadsheetMergerWorker).to have_received(:perform_async).with(inventory.id)
+      expect(SpreadsheetUpdaterWorker).to have_received(:perform_async).with(inventory.id)
     end
 
     it 'marks the inventory record as a background job in progress' do

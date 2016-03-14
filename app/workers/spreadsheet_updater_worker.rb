@@ -1,4 +1,4 @@
-class SpreadsheetMergerWorker < BaseWorker
+class SpreadsheetUpdaterWorker < BaseWorker
   def perform(inventory_id)
     inventory = Inventory.where(id: inventory_id).first
     if inventory.nil?
