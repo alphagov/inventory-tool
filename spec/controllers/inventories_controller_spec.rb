@@ -35,14 +35,6 @@ RSpec.describe InventoriesController, type: :controller do
       expect(response).to have_http_status(:success)
       expect(response).to render_template("index")
     end
-
-    it 'writes to the Activity log if there is an exception' do
-      expect(Inventory).to receive(:all_ordered).and_raise(RuntimeError, 'Dummy Exception')
-      expect(ActivityLog).to receive(:error).with(anything)
-
-      http_login
-      get :index
-    end
   end
 
   describe 'POST create' do
