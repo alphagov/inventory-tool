@@ -13,6 +13,7 @@ gem 'factory_girl_rails', '~> 4.5'
 gem 'sidekiq', '~> 4.0'
 
 gem 'newrelic_rpm'
+gem 'appsignal'
 
 group :development do
   gem 'annotate'
