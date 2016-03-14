@@ -12,5 +12,4 @@ FactoryGirl.define do
       is_skeleton true
     end
   end
-
 end

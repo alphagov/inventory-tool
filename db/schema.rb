@@ -12,19 +12,17 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20160223121800) do
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "inventories", force: true do |t|
     t.string   "name"
     t.string   "key"
-    t.boolean  "is_skeleton",                default: false
+    t.boolean  "is_skeleton", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "date_generated"
     t.boolean  "background_job_in_progress", default: false
     t.text     "flash_notes"
   end
-
 end

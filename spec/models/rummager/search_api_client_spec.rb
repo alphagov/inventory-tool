@@ -6,11 +6,11 @@ module Rummager
     let(:query) { "q=%22Early%20years%22" }
     let(:query_string) do
       base_url +
-      '?' + query +
-      "&fields=link,title,description,public_timestamp," +
-      "format,display_type,specialist_sectors,mainstream_browse_pages,organisations,policies,document_collections,is_historic" +
-      "&start=0" +
-      "&count=0"
+        '?' + query +
+        "&fields=link,title,description,public_timestamp," +
+        "format,display_type,specialist_sectors,mainstream_browse_pages,organisations,policies,document_collections,is_historic" +
+        "&start=0" +
+        "&count=0"
     end
 
     describe '.num_docs_on_gov_uk' do
@@ -36,7 +36,7 @@ module Rummager
       context 'other exception during search' do
         it 'raises a SearchApiClientError' do
           expect(RestClient).to receive(:get).and_raise(RuntimeError, "Dummy Error")
-          expect{
+          expect {
             SearchApiClient.new(999, query).search
           }.to raise_error SearchApiClientError, "RuntimeError: Dummy Error, URL: #{url_with_count(query_string, 1000)}"
         end
@@ -54,7 +54,7 @@ module Rummager
           expect(RestClient).to receive(:get).with(url_with_start_and_count(query_string, 8, 4)).and_return(long_docs_response_json(9, 10, 10))
 
           results = SearchApiClient.new(999, query).search
-          expect(results.map{ |r| r['description']}).to eq(
+          expect(results.map { |r| r['description']}).to eq(
             [
               'Description No. 1',
               'Description No. 2',
@@ -79,7 +79,7 @@ module Rummager
           expect(RestClient).to receive(:get).with(url_with_start_and_count(query_string, 4, 3)).and_return(long_docs_response_json(5, 7, 10))
 
           results = SearchApiClient.new(999, query).search
-          expect(results.map{ |r| r['description']}).to eq(
+          expect(results.map { |r| r['description']}).to eq(
             [
               'Description No. 1',
               'Description No. 2',
@@ -101,7 +101,7 @@ module Rummager
           expect(RestClient).to receive(:get).with(url_with_start_and_count(query_string, 8, 4)).and_return(long_docs_response_json(9, 10, 10))
 
           results = SearchApiClient.new(999, query).search
-          expect(results.map{ |r| r['description']}).to eq(
+          expect(results.map { |r| r['description']}).to eq(
             [
               'Description No. 1',
               'Description No. 2',
@@ -124,7 +124,7 @@ module Rummager
           expect(RestClient).to receive(:get).with(url_with_count(query_string, 5)).and_return(long_docs_response_json(1, 5, 5))
 
           results = SearchApiClient.new(999, query).search
-          expect(results.map{ |r| r['description']}).to eq(
+          expect(results.map { |r| r['description']}).to eq(
             [
               'Description No. 1',
               'Description No. 2',
@@ -159,7 +159,7 @@ module Rummager
     end
 
     def docs_response_json
-      %q|
+      '
       {
         "results":[
           {
@@ -226,7 +226,7 @@ module Rummager
         "start":0,
         "facets":{},
         "suggested_queries":[]
-      }|
+      }'
     end
   end
 end

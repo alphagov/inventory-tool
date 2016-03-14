@@ -9,8 +9,10 @@ RSpec.describe Inventory, type: :model do
     end
 
     it 'rejects a duplicate name' do
-      inventory_1 = create :inventory, name: 'xxxx'
+      create :inventory, name: 'xxxx'
+
       inventory_2 = build :inventory, name: 'xxxx'
+
       expect(inventory_2.valid?).to be false
       expect(inventory_2.errors[:name]).to eq(["There is already an inventory spreadsheet with the same name"])
     end
@@ -22,7 +24,7 @@ RSpec.describe Inventory, type: :model do
     end
 
     it 'rejects the creation of a second skeleton' do
-      skeleton_1 = create :skeleton_inventory
+      create :skeleton_inventory
       skeleton_2 = build :skeleton_inventory, name: 'My 2nd Skeleton', key: 'my-second-skeleton-key'
       expect(skeleton_2.valid?).to be false
       expect(skeleton_2.errors[:base]).to eq ['A Skeleton spreadsheet already exists.  You cannot create another']
@@ -60,7 +62,7 @@ RSpec.describe Inventory, type: :model do
 
   describe 'presented_date_generated' do
     it 'displays the formatted date if present' do
-      inventory = build :inventory, date_generated: Time.new(2016, 1, 2, 9, 2,36, 0)
+      inventory = build :inventory, date_generated: Time.new(2016, 1, 2, 9, 2, 36, 0)
       expect(inventory.presented_date_generated).to eq '2016-01-02 09:02'
     end
 

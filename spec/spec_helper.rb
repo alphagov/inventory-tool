@@ -108,8 +108,8 @@ RSpec.configure do |config|
   # Avoid polluting test output with ActivityLog output
   require_relative './../app/models/activity_log'
   class ActivityLog
-    def self.output_to(level)
-      File.open('log/test.log','w')
+    def self.output_to(_level)
+      File.open('log/test.log', 'w')
     end
   end
 end

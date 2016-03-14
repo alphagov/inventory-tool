@@ -4,28 +4,28 @@ class InventoryItem
 
   GOVUK_BASE_URL = 'https://www.gov.uk'
 
-  FIELD_POSITIONS = [ :title, :url, :description, :first_published_date, :last_updated,
-    :organisations, :format, :display_type, :topics, :mainstream_browse_pages, :policies, :document_collections,
-    :is_withdrawn, :is_historic, :matching_queries, :relevance, :recommendation, :redirect_combine_url, :notes ]
+  FIELD_POSITIONS = [:title, :url, :description, :first_published_date, :last_updated,
+                     :organisations, :format, :display_type, :topics, :mainstream_browse_pages, :policies, :document_collections,
+                     :is_withdrawn, :is_historic, :matching_queries, :relevance, :recommendation, :redirect_combine_url, :notes]
 
   # fields on this model that can be updated from an InventoryItem created from a more recent search
-  UPDATABLE_FIELDS = [ :title, :last_updated, :format, :display_type, :description,
-    :is_withdrawn, :is_historic, :first_published_date]
+  UPDATABLE_FIELDS = [:title, :last_updated, :format, :display_type, :description,
+                      :is_withdrawn, :is_historic, :first_published_date]
 
   # fields on this model which should be merged with an InventoryItem created from a more recent search
-  MERGEABLE_FIELDS = [ :topics, :mainstream_browse_pages, :organisations, :policies, :document_collections, :matching_queries]
+  MERGEABLE_FIELDS = [:topics, :mainstream_browse_pages, :organisations, :policies, :document_collections, :matching_queries]
 
   # fields that are transformed into an array
-  ARRAY_FIELDS = [ :topics, :mainstream_browse_pages, :organisations, :policies, :document_collections, :matching_queries ]
+  ARRAY_FIELDS = [:topics, :mainstream_browse_pages, :organisations, :policies, :document_collections, :matching_queries]
   ARRAY_SEPARATOR = '; '
 
   BOOLEAN_FIELDS = { is_historic: "historic", is_withdrawn: "withdrawn" }
 
   # extra fields we ask for from rummager when doing the search query
-  ADDITIONAL_QUERY_FIELDS = [ :link, :title, :description, :public_timestamp, :format, :display_type,
-    :specialist_sectors, :mainstream_browse_pages, :organisations, :policies, :document_collections, :is_historic ].join(',')
+  ADDITIONAL_QUERY_FIELDS = [:link, :title, :description, :public_timestamp, :format, :display_type,
+                             :specialist_sectors, :mainstream_browse_pages, :organisations, :policies, :document_collections, :is_historic].join(',')
 
-  attr_accessor *FIELD_POSITIONS
+  attr_accessor(*FIELD_POSITIONS)
 
   private_class_method :new
 
@@ -43,7 +43,7 @@ class InventoryItem
       end
     end
     params[:url] = row[1].sub(GOVUK_BASE_URL, '')
-    params.except!(nil)     # gets rid of any nil keys caused by adding rows to the right
+    params.except!(nil) # gets rid of any nil keys caused by adding rows to the right
     InventoryItem.send(:new, params)
   end
 
@@ -101,6 +101,7 @@ class InventoryItem
   end
 
 private
+
   def remove_not_returned
     @notes.gsub!(/Not returned from search as of .*;\s/, '') if @notes
   end
@@ -123,7 +124,7 @@ private
   # can be removed once all spreadsheets with matching query row numbers have been re-generated
   #
   def delete_matching_query_row_numbers(matching_queries)
-    matching_queries.delete_if{ |x| x =~ /^[0-9]+$/ }
+    matching_queries.delete_if { |x| x =~ /^[0-9]+$/ }
   end
 
   def putter_method(fieldname)
@@ -173,6 +174,6 @@ private
   end
 
   def capitalize_first(string)
-    string.slice(0,1).capitalize + string.slice(1..-1)
+    string.slice(0, 1).capitalize + string.slice(1..-1)
   end
 end

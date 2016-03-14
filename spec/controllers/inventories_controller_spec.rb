@@ -4,7 +4,7 @@ RSpec.describe InventoriesController, type: :controller do
   def http_login
     username = 'test'
     password = 'test'
-    request.env["HTTP_AUTHORIZATION"] = ActionController::HttpAuthentication::Basic.encode_credentials(username,password)
+    request.env["HTTP_AUTHORIZATION"] = ActionController::HttpAuthentication::Basic.encode_credentials(username, password)
   end
 
   describe 'GET index' do

@@ -4,14 +4,16 @@ require 'support/inventory_item_spec_helper'
 RSpec.describe GoogleSpreadsheet, type: :model do
   include InventoryItemSpecHelper
 
-  let(:session)  { double('GoogleDriveSession')}
+  let(:session) { double('GoogleDriveSession')}
   let(:overview_ws) { double('GoogleDrive::Worksheet(Overview)', save: nil) }
-  let(:documents_ws) { double('GoogleDrive::Worksheet(Documents)', num_rows: 85, num_cols: 18, save: nil ) }
+  let(:documents_ws) { double('GoogleDrive::Worksheet(Documents)', num_rows: 85, num_cols: 18, save: nil) }
   let(:queries_ws) { double('GoogleDrive::Worksheet(Queries)', num_rows: 2) }
-  let(:spreadsheet) { double(GoogleDrive::Spreadsheet,
+  let(:spreadsheet) {
+    double(GoogleDrive::Spreadsheet,
     overview_worksheet: overview_ws,
     documents_worksheet: documents_ws,
-    queries_worksheet: queries_ws) }
+    queries_worksheet: queries_ws)
+  }
   let(:inventory) { double Inventory }
 
   before(:each) do
@@ -31,7 +33,7 @@ RSpec.describe GoogleSpreadsheet, type: :model do
     end
 
     it 'raises an ArgumentError if given invalid options' do
-      expect{
+      expect {
         GoogleSpreadsheet.send(:new, name: 'xyz')
       }.to raise_error ArgumentError, 'Invalid options passed to GoogleSpreadsheet.new'
     end
@@ -84,7 +86,7 @@ RSpec.describe GoogleSpreadsheet, type: :model do
   describe 'calculate_overview_stats' do
     it 'should gather the stats and put the results in the overview spreadsheet' do
       now = Time.now
-        Timecop.freeze(now) do
+      Timecop.freeze(now) do
         expect(session).to receive(:spreadsheet_by_key).with('my-dummy-key').and_return(spreadsheet)
         expect(Rummager::SearchApiClient).to receive(:num_docs_on_govuk).and_return(190_448)
         gs = GoogleSpreadsheet.find_by_key('my-dummy-key')
@@ -104,7 +106,6 @@ RSpec.describe GoogleSpreadsheet, type: :model do
 
     before(:each) do
       allow(session).to receive(:spreadsheet_by_key).with('my-key').and_return(spreadsheet)
-
     end
 
     describe '#delete' do
@@ -134,9 +135,10 @@ RSpec.describe GoogleSpreadsheet, type: :model do
 
     describe '#query_rows' do
       it 'calls rows on the queries worksheet of the underlying spreadsheet and returns the first column of each row' do
-        worksheet = double 'Worksheet'
-        rows = [ ['aaa', 'bbb'], ['AAAA', 'BBBB', 'CCCC'], ['1234'] ]
+        rows = [%w(aaa bbb), %w(AAAA BBBB CCCC), ['1234']]
+
         allow(queries_ws).to receive(:rows).with(1).and_return(rows)
+
         expect(gs.query_rows.size).to eq 3
         expect(gs.query_rows.map(&:class).uniq).to eq [QueryRow]
         expect(gs.query_rows.map(&:query)).to eq(%w{ aaa AAAA 1234})

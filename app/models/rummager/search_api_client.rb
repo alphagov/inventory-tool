@@ -40,6 +40,7 @@ module Rummager
     end
 
   private
+
     def chunksize
       1000
     end
