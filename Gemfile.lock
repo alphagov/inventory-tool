@@ -142,6 +142,7 @@ GEM
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     netrc (0.11.0)
+    newrelic_rpm (3.15.0.314)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     oauth (0.4.7)
@@ -284,6 +285,7 @@ DEPENDENCIES
   google_drive (~> 1.0)
   govuk-lint
   govuk_admin_template (~> 3.4)
+  newrelic_rpm
   pg
   pry-byebug
   rails (= 4.1.14.1)
