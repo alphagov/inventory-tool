@@ -46,19 +46,5 @@ describe SpreadsheetUpdaterWorker do
         end
       end
     end
-
-    context 'other exceptions during update' do
-      it 'logs the error' do
-        updater = double(SpreadsheetUpdater)
-        expect(SpreadsheetUpdater).to receive(:new).and_return(updater)
-        expect(updater).to receive(:update!).and_raise(RuntimeError, 'Dummy Error')
-        expect(ActivityLog).to receive(:info).with("SpreadsheetUpdaterWorker: Starting for spreadsheet '#{inventory.name}'", inventory.id)
-        expect(ActivityLog).to receive(:info).with("SpreadsheetUpdaterWorker: Spreadsheet Updater created for Inventory #{inventory.id}", inventory.id)
-        expect(ActivityLog).to receive(:error).with(/SpreadsheetUpdaterWorker: RuntimeError: Dummy Error/, inventory.id)
-
-        worker = SpreadsheetUpdaterWorker.new
-        worker.perform(inventory.id)
-      end
-    end
   end
 end
