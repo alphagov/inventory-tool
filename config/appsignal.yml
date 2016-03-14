@@ -1,0 +1,7 @@
+development:
+  active: false
+
+production:
+  active: true
+  push_api_key: "<%= ENV['APPSIGNAL_PUSH_API_KEY'] %>"
+  name: "GOV.UK Content Inventory"
