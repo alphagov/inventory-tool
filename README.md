@@ -4,7 +4,6 @@ App for generating and updating spreadsheets used in making an inventory of govu
 
 It runs on heroku at http://inventory-tool.herokuapp.com/
 
-
 ## Technical documentation
 
 This is a Heroku Ruby on Rails application that maintains a database of spreadsheets that the
@@ -50,19 +49,9 @@ bundle exec rake
 
 ## Deployment
 
-This is deployed to Heroku by adding the relevant remotes and then pushing the branch
+The `master` branch is [automatically deployed](https://devcenter.heroku.com/articles/github-integration#automatic-deploys) to Heroku.
 
-```sh
-  git remote add heroku git@heroku.com:inventory-tool.git
-  git push heroku master
-```
-
-or if you wanted to deploy branch with name 'my-branch'
-
-```sh
-  git push heroku my-branch:master
-```
-
+![](doc/deploy.png)
 
 ## Licence
 
