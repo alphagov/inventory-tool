@@ -1,6 +1,4 @@
 class InventoriesController < ApplicationController
-  http_basic_authenticate_with name: ENV["USERNAME"], password: ENV["PASSWORD"]
-
   def index
     @inventories = Inventory.all_ordered
     @inventory = Inventory.new
