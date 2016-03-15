@@ -55,20 +55,19 @@ describe InventoryItemCollection do
 
   describe '.new' do
     it 'raises an error if called from outside the class' do
-      expect{
+      expect {
         InventoryItemCollection.new(:query)
       }.to raise_error NoMethodError, "private method `new' called for InventoryItemCollection:Class"
     end
 
     it 'should raise an error if the source is invalid' do
-      expect{
+      expect {
         InventoryItemCollection.send(:new, :xxx)
       }.to raise_error ArgumentError, 'Source must be :query or :sheet'
     end
   end
 
   describe '.new_from_spreadsheet' do
-
     it 'has the same number of InventoryItems as rows' do
       expect(iic.size).to eq rows.size
     end
@@ -89,7 +88,7 @@ describe InventoryItemCollection do
       iic.collection['/tax/benefits'] = InventoryItem.send(:new, {url: '/tax/benefits'})
       iic.collection['/childcare'] = InventoryItem.send(:new, {url: '/childcare'})
       iic.collection['/aardvark/maintenance'] = InventoryItem.send(:new, {url: '/aardvark/maintenance'})
-      expect(iic.items.map(&:url)).to eq( %w{ /aardvark/maintenance /childcare /tax/benefits })
+      expect(iic.items.map(&:url)).to eq(%w{ /aardvark/maintenance /childcare /tax/benefits })
     end
   end
 
@@ -101,8 +100,8 @@ describe InventoryItemCollection do
       iic = double InventoryItemCollection
       client1 = double Rummager::SearchApiClient
       client2 = double Rummager::SearchApiClient
-      result_set_1 = [ 'result_set_1' ]
-      result_set_2 = [ 'result_set_2' ]
+      result_set_1 = ['result_set_1']
+      result_set_2 = ['result_set_2']
       expect(InventoryItemCollection).to receive(:new).with(:query).and_return(iic)
       expect(Rummager::SearchApiClient).to receive(:new).with(inventory.id, query_row_1.query).and_return(client1)
       expect(Rummager::SearchApiClient).to receive(:new).with(inventory.id, query_row_2.query).and_return(client2)
@@ -115,17 +114,19 @@ describe InventoryItemCollection do
     end
 
     it 'should update matched queries when two queries produce the same document' do
-      result_1 = [{'link' => '/early-years-accreditation-process'},{'link' => '/early-years-learning-centres'}]
-      result_2 = [{'link' => '/early-years-accreditation-process'},{'link' => '/adult-education'}]
+      result_1 = [{'link' => '/early-years-accreditation-process'}, {'link' => '/early-years-learning-centres'}]
+      result_2 = [{'link' => '/early-years-accreditation-process'}, {'link' => '/adult-education'}]
       client1 = double Rummager::SearchApiClient
       client2 = double Rummager::SearchApiClient
       expect(Rummager::SearchApiClient).to receive(:new).with(inventory.id, query_row_1.query).and_return(client1)
       expect(Rummager::SearchApiClient).to receive(:new).with(inventory.id, query_row_2.query).and_return(client2)
       expect(client1).to receive(:search).and_return(result_1)
       expect(client2).to receive(:search).and_return(result_2)
+
       iic = InventoryItemCollection.new_from_search_queries(inventory, [query_row_1, query_row_2])
-      expect(iic.items.map(&:url)).to eq(%w{ /adult-education /early-years-accreditation-process /early-years-learning-centres})
-      expect(iic.items.map(&:matching_queries)).to eq ([["Late years"], ["Early years", "Late years"], ["Early years"]])
+
+      expect(iic.items.map(&:url)).to eq(%w{/adult-education /early-years-accreditation-process /early-years-learning-centres})
+      expect(iic.items.map(&:matching_queries)).to eq([["Late years"], ["Early years", "Late years"], ["Early years"]])
     end
   end
 
@@ -185,23 +186,23 @@ describe InventoryItemCollection do
             iic.merge_collections!(query_iic)
 
             iic.items.each do |inventory_item|
-               expect(inventory_item.matching_queries).to eq([])
+              expect(inventory_item.matching_queries).to eq([])
             end
           end
         end
-        
+
         context "with a changed field in the new collection" do
-          let (:changed_item) {InventoryItem.send(:new, {url: "/tax/childcare"})}
-
           it "replaces the value" do
-            expect(iic.collection[changed_item.url].matching_queries).to eq(['bar', 'foo'])
+            changed_item = InventoryItem.send(:new, { url: "/tax/childcare" })
 
-            changed_item.matching_queries = ['foo', 'baz']
+            expect(iic.collection[changed_item.url].matching_queries).to eq(%w(bar foo))
+
+            changed_item.matching_queries = %w(foo baz)
             query_iic = InventoryItemCollection.send(:new, :query)
             query_iic.collection[changed_item.url] = changed_item
             iic.merge_collections!(query_iic)
 
-            expect(iic.collection[changed_item.url].matching_queries).to eq(['baz', 'foo'])
+            expect(iic.collection[changed_item.url].matching_queries).to eq(%w(baz foo))
           end
         end
       end

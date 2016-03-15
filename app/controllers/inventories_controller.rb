@@ -1,6 +1,4 @@
 class InventoriesController < ApplicationController
-  http_basic_authenticate_with name: ENV["USERNAME"], password: ENV["PASSWORD"]
-
   def index
     @inventories = Inventory.all_ordered
     @inventory = Inventory.new
@@ -29,8 +27,8 @@ class InventoriesController < ApplicationController
     inventory = Inventory.find(params[:id])
     inventory.start_background_job!("Regenerating Queries (started #{Time.now.strftime('%Y-%m-%d %H:%M:%S')}). Refresh in a few minutes to view")
     inventory.log(:info, "Regeneration requested for spreadsheet '#{inventory.name}'")
-    SpreadsheetMergerWorker.perform_async(inventory.id)
-    inventory.log(:info, "SpreadsheetMergerWorker.perform_async(#{inventory.id})")
+    SpreadsheetUpdaterWorker.perform_async(inventory.id)
+    inventory.log(:info, "SpreadsheetUpdaterWorker.perform_async(#{inventory.id})")
     flash[:warning] = "A background job to regenerate the queries for '#{inventory.name}' has been started"
     redirect_to inventories_path
   end

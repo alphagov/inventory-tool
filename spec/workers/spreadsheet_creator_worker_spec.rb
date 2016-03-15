@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe SpreadsheetCreatorWorker do
   describe '#perform' do
-    let(:inventory)  { Inventory.create_pending('My new spreadsheet') }
+    let(:inventory) { Inventory.create_pending('My new spreadsheet') }
     let(:gs) { double(GoogleSpreadsheet, key: 'my-new-spreadsheet-key') }
     let(:frozen_time) { Time.new(2016, 1, 10, 7, 24, 0, 0) }
 

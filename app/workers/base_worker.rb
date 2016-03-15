@@ -1,9 +1,10 @@
 class BaseWorker
   include Sidekiq::Worker
 
-  sidekiq_options :retry => false
+  sidekiq_options retry: false
 
 private
+
   def log(level, inventory_id, message)
     message = "#{self.class}: #{message}"
     ActivityLog.send(level, message, inventory_id)

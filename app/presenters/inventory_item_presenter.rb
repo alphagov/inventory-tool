@@ -10,6 +10,7 @@ class InventoryItemPresenter
   end
 
 private
+
   def present_field(field)
     specialized_method = presenter_method_for(field)
     respond_to?(specialized_method, true) ? send(specialized_method) : @item.send(field)

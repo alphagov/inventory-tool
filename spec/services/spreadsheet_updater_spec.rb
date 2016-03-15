@@ -11,7 +11,7 @@ describe SpreadsheetUpdater do
       query_row_2 = double QueryRow, query: 'Late years'
 
       expect(GoogleSpreadsheet).to receive(:find_by_key).with("my-key").and_return(gs)
-      expect(gs).to receive(:query_rows).and_return([ query_row_1, query_row_2 ])
+      expect(gs).to receive(:query_rows).and_return([query_row_1, query_row_2])
       expect(gs).to receive(:documents).and_return(google_iic)
       expect(InventoryItemCollection).to receive(:new_from_search_queries).with(inventory, [query_row_1, query_row_2]).and_return(govuk_iic)
 

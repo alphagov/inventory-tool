@@ -26,9 +26,9 @@ class InventoryItemCollection
     inventory.log :info, "#{self} instantiating from queries"
 
     iic = new(:query)
-    query_rows.each_with_index do |query_row, index|
+    query_rows.each do |query_row|
       next if query_row.empty?
-      ActivityLog.debug  "instantiating search client with #{query_row.query}", inventory.id
+      ActivityLog.debug "instantiating search client with #{query_row.query}", inventory.id
       search_results = Rummager::SearchApiClient.new(inventory.id, query_row.query).search
       inventory.log :info, "#{self} Adding #{search_results.size} results from query #{query_row.name}"
       iic.add_search_results(search_results, query_row.name)
@@ -63,9 +63,7 @@ class InventoryItemCollection
       raise "#merge_collections! must be called on an instance created from a spreadsheet and passed an instance created from a query"
     end
 
-    items.each do |spreadsheet_item|
-      spreadsheet_item.reset_mergeable_fields!
-    end
+    items.each(&:reset_mergeable_fields!)
 
     query_collection.items.each do |query_collection_item|
       update_item(query_collection_item)
@@ -76,9 +74,10 @@ class InventoryItemCollection
   end
 
 private
+
   def add_entry_to_collection(item, query_row_number)
     if @collection.key?(item.url)
-      @collection[item.url].matching_queries <<  query_row_number.to_s
+      @collection[item.url].matching_queries << query_row_number.to_s
     else
       @collection[item.url] = item
     end

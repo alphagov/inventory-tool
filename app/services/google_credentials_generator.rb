@@ -13,6 +13,7 @@ class GoogleCredentialsGenerator
   end
 
 private
+
   def display_env_vars(refresh_token)
     puts "Set the following environment variable for the running app"
     puts "    GOOGLE_DRIVE_REFRESH_TOKEN=\"#{refresh_token}\""

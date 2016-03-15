@@ -51,19 +51,21 @@ describe InventoryItem do
 
   describe '.new_from_search_result' do
     context 'population of fields which are missing from the search result' do
-      let(:fields_blank_when_missing) { [ :relevance, :redirect_combine_url, :notes, :recommendation ] }
+      let(:fields_blank_when_missing) { [:relevance, :redirect_combine_url, :notes, :recommendation] }
       let(:fields_that_must_be_present) { [:url, :matching_queries] }
       let(:fields_that_should_be_an_emtpy_array_when_missing) { InventoryItem::ARRAY_FIELDS - [:matching_queries] }
       let(:fields_that_must_be_false_when_missing) { [:is_withdrawn, :is_historic] }
-      let(:fields_that_must_be_nil_when_missing) { [ :last_updated, :description ] }
-      let(:fields_that_must_be_none_when_missing) { [ :display_type] }
-      let(:fields_unknown_when_missing) { InventoryItem::FIELD_POSITIONS -
-        fields_blank_when_missing -
-        fields_that_must_be_present -
-        fields_that_must_be_false_when_missing -
-        fields_that_must_be_none_when_missing -
-        InventoryItem::ARRAY_FIELDS -
-        fields_that_must_be_nil_when_missing }
+      let(:fields_that_must_be_nil_when_missing) { [:last_updated, :description] }
+      let(:fields_that_must_be_none_when_missing) { [:display_type] }
+      let(:fields_unknown_when_missing) {
+        InventoryItem::FIELD_POSITIONS -
+          fields_blank_when_missing -
+          fields_that_must_be_present -
+          fields_that_must_be_false_when_missing -
+          fields_that_must_be_none_when_missing -
+          InventoryItem::ARRAY_FIELDS -
+          fields_that_must_be_nil_when_missing
+      }
 
       let(:item) { InventoryItem.new_from_search_result({'link' => '/abc'}, 4) }
 
@@ -102,7 +104,8 @@ describe InventoryItem do
 
     context 'population of fields which are present in the result set' do
       require_relative '../data/search_api_client_results'
-      let(:search_result) { dummy_search_api_results
+      let(:search_result) {
+        dummy_search_api_results
         { 'link' => '/early-education',
           'title' => 'Early years education',
           'description' => "A guide to eduction for the under 8s",
@@ -160,7 +163,7 @@ describe InventoryItem do
           'document_type' => 'edition'
         }
       }
-      let(:item)   { InventoryItem.new_from_search_result(search_result, 2)}
+      let(:item) { InventoryItem.new_from_search_result(search_result, 2)}
 
       it 'populates the url from the links field' do
         expect(item.url).to eq '/early-education'
@@ -171,7 +174,7 @@ describe InventoryItem do
       end
 
       it 'populates the topics fields with capitalized titles in alphabetic order' do
-        expect(item.topics).to eq([ 'Aardvark sexing', 'Hippo management', 'Zebra preservation' ])
+        expect(item.topics).to eq(['Aardvark sexing', 'Hippo management', 'Zebra preservation'])
       end
 
       it 'populates the organisations fields with capitalized acronyms in alphabetic order' do
@@ -183,11 +186,11 @@ describe InventoryItem do
       end
 
       it 'populates policies' do
-        expect(item.policies).to eq( %w{
+        expect(item.policies).to eq(%w{
           childcare-and-early-education
           looked-after-children-and-adoption
           special-educational-needs-and-disability-send }
-        )
+                                   )
       end
 
       it 'populates document collections with titles in alphabetic order' do
@@ -202,7 +205,7 @@ describe InventoryItem do
 
   describe '.new' do
     it 'raises an error when called' do
-      expect{
+      expect {
         InventoryItem.new
       }.to raise_error NoMethodError, "private method `new' called for InventoryItem:Class"
     end
@@ -262,11 +265,11 @@ describe InventoryItem do
     end
 
     it 'should substitue title if specified field is not present in hash' do
-      expect(item.send(:extract_from_array_of_hashes, doc, 'element', 'minister')).to eq( ['Education', 'George Osborne', 'Law'])
+      expect(item.send(:extract_from_array_of_hashes, doc, 'element', 'minister')).to eq(['Education', 'George Osborne', 'Law'])
     end
 
     it 'should use the specified fallback field' do
-      expect(item.send(:extract_from_array_of_hashes, doc, 'element', 'minister', 'slug')).to eq( ['/dfe', '/moj', 'George Osborne'])
+      expect(item.send(:extract_from_array_of_hashes, doc, 'element', 'minister', 'slug')).to eq(['/dfe', '/moj', 'George Osborne'])
     end
 
     it 'should insert error message if no such field found' do
@@ -288,8 +291,8 @@ describe InventoryItem do
         mainstream_browse_pages: ['my_new_browse_page'],
         organisations: %w{ HMRC DfE MOJ },
         policies: [],
-        document_collections: [ 'Ofsted inspections of registered childcare providers' ],
-        matching_queries: [ 2, 4, 5],
+        document_collections: ['Ofsted inspections of registered childcare providers'],
+        matching_queries: [2, 4, 5],
         is_withdrawn: true,
         is_historic: true,
         first_published_date: Date.new(2014, 1, 1),
@@ -317,14 +320,14 @@ describe InventoryItem do
     it 'merges the mergeable fields' do
       expect(item.topics).to eq(['added topic no 1', 'another added topic', 'first topic', 'last topic', 'middle topic'])
       expect(item.mainstream_browse_pages).to eq(%w{births-deaths-marriages/child-adoption education/school-life my_new_browse_page })
-      expect(item.organisations).to eq( %w{ DfE HMRC MOJ })
+      expect(item.organisations).to eq(%w{ DfE HMRC MOJ })
       expect(item.policies).to eq(%w{ childcare-and-early-education  special-educational-needs-and-disability-send })
       expect(item.document_collections).to eq([
         "Early years and childcare inspections: resources for inspectors and other organisations",
         "Ofsted inspections of registered childcare providers",
         "Ofsted's compliance, investigation and enforcement handbooks",
       ])
-      expect(item.matching_queries).to eq( [2, 3, 4, 5])
+      expect(item.matching_queries).to eq([2, 3, 4, 5])
     end
 
     it 'removes the not returned message if there' do

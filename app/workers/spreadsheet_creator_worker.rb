@@ -6,8 +6,6 @@ class SpreadsheetCreatorWorker < BaseWorker
       log :info, inventory_id, "Google spreadsheet created from skeleton with key #{gs.key}"
       Inventory.find(inventory_id).mark_creation_complete(gs.key)
       log :info, inventory_id, "Inventory record marked as complete with key '#{gs.key}'"
-    rescue => error
-      log_error(inventory_id, error)
     end
   end
 end

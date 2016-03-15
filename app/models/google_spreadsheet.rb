@@ -49,7 +49,7 @@ class GoogleSpreadsheet
 
   def query_rows
     ws = queries_worksheet
-    ws.rows(1).map{ |row| QueryRow.new(row) }
+    ws.rows(1).map { |row| QueryRow.new(row) }
   end
 
   def update(inventory_item_collection)
@@ -69,14 +69,15 @@ class GoogleSpreadsheet
 
   def calculate_overview_stats
     ws = overview_worksheet
-    ws[1,2] = Time.now.strftime('%Y-%m-%d %H:%M:%S')
-    ws[2,2] = num_queries
-    ws[3,2] = num_documents
-    ws[4,2] = num_docs_on_govuk
+    ws[1, 2] = Time.now.strftime('%Y-%m-%d %H:%M:%S')
+    ws[2, 2] = num_queries
+    ws[3, 2] = num_documents
+    ws[4, 2] = num_docs_on_govuk
     ws.save
   end
 
 private
+
   def set_max_rows(num_rows)
     num_rows += 2
     ws = documents_worksheet
@@ -133,10 +134,10 @@ private
 
   def initialize_overview
     ws = overview_worksheet
-    ws[1,2] = Date.today
-    ws[2,2] = 0
-    ws[3,2] = 0
-    ws[4,2] = 0
+    ws[1, 2] = Date.today
+    ws[2, 2] = 0
+    ws[3, 2] = 0
+    ws[4, 2] = 0
     ws.save
   end
 end
