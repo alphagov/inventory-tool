@@ -26,7 +26,7 @@ class InventoryItemCollection
     inventory.log :info, "#{self} instantiating from queries"
 
     iic = new(:query)
-    query_rows.each_with_index do |query_row, _index|
+    query_rows.each do |query_row|
       next if query_row.empty?
       ActivityLog.debug "instantiating search client with #{query_row.query}", inventory.id
       search_results = Rummager::SearchApiClient.new(inventory.id, query_row.query).search
