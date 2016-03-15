@@ -3,10 +3,11 @@ require 'rails_helper'
 module Rummager
   describe SearchApiClient do
     let(:base_url) { 'https://www.gov.uk/api/search.json'}
-    let(:query) { "q=%22Early%20years%22" }
+    let(:query) { "q=%22Early+years%22" }
     let(:query_string) do
       base_url +
         '?' + query +
+        "&debug=include_withdrawn" +
         "&fields=link,title,description,public_timestamp," +
         "format,display_type,specialist_sectors,mainstream_browse_pages,organisations,policies,document_collections,is_historic" +
         "&start=0" +

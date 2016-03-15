@@ -8,13 +8,21 @@ module Rummager
     attr_reader :search_url, :result_set
 
     def initialize(inventory_id, query)
-      @query = URI.escape(URI.unescape(query))
+      parsed_query = Rack::Utils.parse_query(query)
+
+      parsed_query['debug'] ||= []
+      parsed_query['debug'] << 'include_withdrawn'
+      parsed_query['debug'] = parsed_query['debug'].join(',')
+
+      @query = Rack::Utils.build_query(parsed_query)
+
       if @query =~ /&count=(\d+)/
         @num_required_results = $1.to_i
         @query.sub!(/&count=\d+/, '')
       else
         @num_required_results = MAX_REQUIRED_RESULTS
       end
+
       @query += "&fields=#{InventoryItem::ADDITIONAL_QUERY_FIELDS}"
       @inventory_id = inventory_id
     end
